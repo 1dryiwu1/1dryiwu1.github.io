@@ -11,6 +11,7 @@ const navItems = [
   { label: '项目', href: '#projects' },
   { label: '能力', href: '#skills' },
   { label: '时间线', href: '#timeline' },
+  { label: '证书', href: '#certificates' },
   { label: '工作之外', href: '#outside' },
   { label: '联系', href: '#contact' },
 ];
@@ -111,6 +112,27 @@ const timeline = [
     tag: 'STAGE 04',
     title: '工程化表达与能力收束',
     text: '不再只是做功能，而是开始关注架构、方案、文档、协作和交付质量，形成更完整的工程思维。',
+  },
+];
+
+const certificates = [
+  {
+    title: '重庆市区块链创新大赛 · 一等奖',
+    meta: '重庆市教育委员会 / 本科组 / 第四届',
+    date: '2025.12',
+    image: '/assets/cert-blockchain.jpg',
+  },
+  {
+    title: '全国大学生数学竞赛 · 三等奖',
+    meta: '中国数学会 / 非数学 A 类 / 第十七届',
+    date: '2025.12',
+    image: '/assets/cert-math.jpg',
+  },
+  {
+    title: '挑战杯校赛 · 三等奖',
+    meta: '重庆工程学院 / 第十五届 / 红盾维安',
+    date: '2026.03',
+    image: '/assets/cert-challenge.jpg',
   },
 ];
 
@@ -389,9 +411,28 @@ onUnmounted(() => {
       </div>
     </section>
 
+    <section id="certificates" class="content-section certificates-section">
+      <div class="section-heading reveal">
+        <p class="section-index">05 / HONORS & CERTIFICATES</p>
+        <h2>荣誉与证书</h2>
+        <p>把竞赛结果作为可验证的补充证据，让项目能力与学习表现彼此支撑。</p>
+      </div>
+
+      <div class="certificate-grid">
+        <article v-for="cert in certificates" :key="cert.title" class="certificate-card reveal">
+          <img :src="cert.image" :alt="cert.title">
+          <div class="certificate-info">
+            <span>{{ cert.date }}</span>
+            <h3>{{ cert.title }}</h3>
+            <p>{{ cert.meta }}</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <section id="outside" class="content-section outside-section">
       <div class="section-heading reveal">
-        <p class="section-index">05 / PERSONAL SIDE</p>
+        <p class="section-index">06 / PERSONAL SIDE</p>
         <h2>工作之外</h2>
         <p>保持创造力、表达能力与长期学习节奏的个人侧面。</p>
       </div>
@@ -407,7 +448,7 @@ onUnmounted(() => {
 
     <section id="contact" class="contact-section">
       <div class="section-heading reveal">
-        <p class="section-index">06 / CONTACT CHANNEL</p>
+        <p class="section-index">07 / CONTACT CHANNEL</p>
         <h2>联系我</h2>
         <p>如果你希望进一步了解项目、经历或合作可能，欢迎直接联系。</p>
       </div>
@@ -1159,6 +1200,67 @@ a {
   line-height: 1.85;
 }
 
+.certificate-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.certificate-card {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.22);
+  transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+
+.certificate-card:hover {
+  border-color: rgba(66,240,109,0.42);
+  transform: translateY(-3px);
+  background: var(--bg-panel-strong);
+}
+
+.certificate-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-bottom: 1px solid var(--line);
+  filter: saturate(0.72) contrast(1.05);
+  transition: filter 0.25s ease, transform 0.25s ease;
+}
+
+.certificate-card:hover img {
+  filter: saturate(1) contrast(1.04);
+  transform: scale(1.015);
+}
+
+.certificate-info {
+  padding: 20px;
+}
+
+.certificate-info span {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+}
+
+.certificate-info h3 {
+  margin: 0;
+  font-size: 1.08rem;
+  line-height: 1.45;
+  font-weight: 600;
+}
+
+.certificate-info p {
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
 .outside-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -1221,6 +1323,7 @@ a {
   .hero-layout,
   .project-grid,
   .pillar-grid,
+  .certificate-grid,
   .outside-grid {
     grid-template-columns: 1fr;
   }
