@@ -351,8 +351,8 @@
           </div>
           <div class="hobby-copy">
             <div class="hobby-kicker">VISUAL THINKING</div>
-            <div class="hobby-name">??</div>
-            <div class="hobby-desc">??????????????????????????????????????????</div>
+            <div class="hobby-name">绘画</div>
+            <div class="hobby-desc">业余爱好，享受用线条与色彩表达的过程。虽然技法不算专业，但这是我在代码之外保持创造力的一种方式。</div>
           </div>
         </div>
         <div class="hobby-card fade-up" data-hobby="guitar">
@@ -376,8 +376,8 @@
           </div>
           <div class="hobby-copy">
             <div class="hobby-kicker">RHYTHM & FLOW</div>
-            <div class="hobby-name">??</div>
-            <div class="hobby-desc">???????????????????????????????????????????</div>
+            <div class="hobby-name">吉他</div>
+            <div class="hobby-desc">偶尔拨弄几首曲子，纯粹的兴趣。音乐带来的节奏感有时也会影响我对代码结构的思考。</div>
           </div>
         </div>
         <div class="hobby-card fade-up" data-hobby="doc">
@@ -400,8 +400,8 @@
           </div>
           <div class="hobby-copy">
             <div class="hobby-kicker">CLEAR RECORDS</div>
-            <div class="hobby-name">?????</div>
-            <div class="hobby-desc">?????????????????????????????????????????????</div>
+            <div class="hobby-name">文档与写作</div>
+            <div class="hobby-desc">具备较强的文档撰写能力，在项目开发中习惯性输出需求分析、技术方案、架构设计文档，确保知识与决策可追溯。</div>
           </div>
         </div>
       </div>
