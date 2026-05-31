@@ -360,17 +360,26 @@
           <div class="hobby-orb orb-b"></div>
           <div class="hobby-stage guitar-stage" aria-hidden="true">
             <svg viewBox="0 0 160 120" class="hobby-art">
-              <path class="sound-wave wave-one" d="M34 35 C20 50 20 70 34 85"/>
-              <path class="sound-wave wave-two" d="M126 35 C140 50 140 70 126 85"/>
+              <path class="sound-wave wave-one" d="M28 41 C18 52 18 68 28 79"/>
+              <path class="sound-wave wave-two" d="M132 41 C142 52 142 68 132 79"/>
               <g class="guitar-body">
-                <path class="guitar-shape" d="M68 35 C51 36 43 50 50 63 C38 72 44 91 60 92 C69 93 73 88 80 88 C87 88 91 93 100 92 C116 91 122 72 110 63 C117 50 109 36 92 35 C86 34 83 39 80 43 C77 39 74 34 68 35Z"/>
-                <circle class="sound-hole" cx="80" cy="65" r="9"/>
-                <path class="guitar-neck" d="M90 43 L124 18"/>
-                <path class="guitar-head" d="M121 14 L135 20 L128 29"/>
-                <path class="string string-one" d="M61 67 L126 20"/>
-                <path class="string string-two" d="M68 72 L130 25"/>
-                <path class="string string-three" d="M76 77 L134 30"/>
-                <path class="pick" d="M52 39 C66 43 70 55 58 65 C50 57 47 47 52 39Z"/>
+                <path class="guitar-shape" d="M55 35 C44 42 43 57 52 66 C42 76 46 93 62 95 C72 96 79 91 82 84 C85 91 92 96 102 95 C118 93 122 76 112 66 C121 57 120 42 109 35 C100 29 89 31 82 39 C75 31 64 29 55 35Z"/>
+                <circle class="sound-hole" cx="82" cy="66" r="7.6"/>
+                <path class="guitar-bridge" d="M68 80 H96"/>
+                <rect class="guitar-neck" x="95" y="49" width="40" height="9" rx="4.5"/>
+                <path class="guitar-head" d="M135 47 H146 Q151 47 151 52 Q151 57 146 57 H135"/>
+                <circle class="tuner tuner-a" cx="145" cy="48" r="1.5"/>
+                <circle class="tuner tuner-b" cx="149" cy="52" r="1.5"/>
+                <circle class="tuner tuner-c" cx="145" cy="56" r="1.5"/>
+                <path class="string string-one" d="M69 62 H148"/>
+                <path class="string string-two" d="M69 64 H148"/>
+                <path class="string string-three" d="M69 66 H148"/>
+                <path class="string string-four" d="M69 68 H148"/>
+                <path class="string string-five" d="M69 70 H148"/>
+                <path class="string string-six" d="M69 72 H148"/>
+                <path class="fret fret-one" d="M107 49 V58"/>
+                <path class="fret fret-two" d="M115 49 V58"/>
+                <path class="fret fret-three" d="M123 49 V58"/>
               </g>
             </svg>
           </div>
@@ -754,9 +763,10 @@ onMounted(() => {
     }
 
     if (card.dataset.hobby === 'guitar') {
-      tl.to(card.querySelectorAll('.string'), { scaleY: 1.45, transformOrigin: '50% 50%', duration: 0.18, yoyo: true, repeat: 3, stagger: 0.04 }, 0)
-        .to(card.querySelector('.pick'), { x: 20, y: 18, rotate: 28, duration: 0.45 }, 0.02)
-        .to(card.querySelectorAll('.sound-wave'), { opacity: 1, scale: 1.15, duration: 0.5, stagger: 0.08 }, 0.1);
+      tl.to(card.querySelector('.guitar-body'), { rotate: -2, transformOrigin: '82px 66px', duration: 0.26, yoyo: true, repeat: 1 }, 0)
+        .to(card.querySelectorAll('.string'), { opacity: 1, strokeWidth: 1.7, duration: 0.12, yoyo: true, repeat: 3, stagger: 0.03 }, 0.04)
+        .to(card.querySelectorAll('.sound-wave'), { opacity: 0.9, scale: 1.08, duration: 0.45, stagger: 0.07 }, 0.1)
+        .to(card.querySelector('.sound-hole'), { scale: 1.08, transformOrigin: '82px 66px', duration: 0.22, yoyo: true, repeat: 1 }, 0.1);
     }
 
     if (card.dataset.hobby === 'doc') {
@@ -1091,10 +1101,14 @@ body {
 .wave-two { animation-delay:.3s; }
 .guitar-shape { filter:drop-shadow(0 0 12px var(--accent-glow)); }
 .sound-hole { fill:var(--bg); stroke:var(--accent); stroke-width:2; }
-.guitar-neck, .guitar-head { fill:none; stroke:var(--accent); stroke-width:5; stroke-linecap:round; stroke-linejoin:round; }
-.string { fill:none; stroke:var(--text); stroke-width:1.3; opacity:.75; transform-box:fill-box; transform-origin:center; stroke-dasharray:80; animation:stringPulse 1.8s ease-in-out infinite; }
-.string-two { animation-delay:.16s; } .string-three { animation-delay:.32s; }
-.pick { fill:var(--accent); opacity:.9; filter:drop-shadow(0 0 8px var(--accent-glow)); transform-origin:center; animation:pickHover 3s ease-in-out infinite; }
+.guitar-bridge { fill:none; stroke:var(--accent); stroke-width:3; stroke-linecap:round; opacity:.9; }
+.guitar-neck { fill:rgba(23,247,0,.12); stroke:var(--accent); stroke-width:1.5; }
+.guitar-head { fill:none; stroke:var(--accent); stroke-width:4; stroke-linecap:round; }
+.tuner { fill:var(--accent); opacity:.95; }
+.fret { stroke:rgba(255,255,255,.55); stroke-width:1; opacity:.8; }
+.string { fill:none; stroke:rgba(255,255,255,.85); stroke-width:1.15; opacity:.78; transform-box:fill-box; transform-origin:center; stroke-dasharray:82; animation:stringPulse 2.1s ease-in-out infinite; }
+.string-two { animation-delay:.08s; } .string-three { animation-delay:.16s; }
+.string-four { animation-delay:.24s; } .string-five { animation-delay:.32s; } .string-six { animation-delay:.4s; }
 .doc-shadow-page, .doc-back-page { fill:rgba(255,255,255,.035); stroke:rgba(255,255,255,.14); stroke-width:1.4; }
 .doc-front-page { filter:drop-shadow(0 0 12px var(--accent-glow)); }
 .doc-corner, .doc-line, .doc-check { fill:none; stroke:var(--accent); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
@@ -1106,8 +1120,7 @@ body {
 @keyframes paintFloat { 50% { transform:translateY(-5px) scale(1.18); opacity:1; } }
 @keyframes brushIdle { 50% { transform:translate(4px,-5px) rotate(5deg); } }
 @keyframes soundBreath { 50% { transform:scale(1.08); opacity:.9; } }
-@keyframes stringPulse { 50% { transform:scaleY(1.28); opacity:1; } }
-@keyframes pickHover { 50% { transform:translate(7px,6px) rotate(14deg); } }
+@keyframes stringPulse { 50% { opacity:1; stroke-width:1.45; } }
 @keyframes docLine { 50% { opacity:1; stroke-dashoffset:-10; } }
 @keyframes scanDoc { 0%,100% { transform:translateY(-2px); opacity:.05; } 50% { transform:translateY(34px); opacity:.42; } }
 @media (max-width:980px) {
