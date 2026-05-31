@@ -1,4 +1,4 @@
-﻿name: Deploy Vue Portfolio
+name: Deploy Vue Portfolio
 
 on:
   push:
@@ -32,6 +32,9 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Use app build as site index
+        run: cp dist/app.html dist/index.html
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
