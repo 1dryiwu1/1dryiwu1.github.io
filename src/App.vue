@@ -327,53 +327,82 @@
       <h2 class="section-title fade-up">代码之外</h2>
       <div class="hobbies-grid">
         <div class="hobby-card fade-up" data-hobby="paint">
-          <div class="hobby-icon">
-            <svg viewBox="0 0 24 24">
-              <g class="icon-group">
-                <!-- 调色板主体 -->
-                <path d="M12 2C7.6 2 4 5.6 4 10c0 3 1.5 5.5 3.8 7 .5.3.8.8.8 1.4V20c0 .6.4 1 1 1h4.8c.6 0 1-.4 1-1v-1.6c0-.6.3-1.1.8-1.4C18.5 15.5 20 13 20 10c0-4.4-3.6-8-8-8z" class="icon-palette"/>
-                <!-- 颜料点 -->
-                <circle cx="9" cy="7" r="1.5" class="icon-dot1" style="fill:var(--accent)"/>
-                <circle cx="15" cy="6" r="1.5" class="icon-dot2" style="fill:var(--accent)"/>
-                <circle cx="7" cy="12" r="1.5" class="icon-dot3" style="fill:var(--accent)"/>
-                <circle cx="17" cy="12" r="1.5" class="icon-dot4" style="fill:var(--accent)"/>
-                <circle cx="12" cy="8" r="1.5" class="icon-dot5" style="fill:var(--accent)"/>
-                <!-- 笔刷 -->
-                <line x1="18" y1="22" x2="22" y2="18" class="icon-brush" stroke-width="2.5"/>
-                <line x1="22" y1="18" x2="20" y2="16" class="icon-brush-tip"/>
+          <div class="hobby-orb orb-a"></div>
+          <div class="hobby-orb orb-b"></div>
+          <div class="hobby-stage paint-stage" aria-hidden="true">
+            <svg viewBox="0 0 160 120" class="hobby-art">
+              <defs>
+                <linearGradient id="paintStroke" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="var(--accent)" stop-opacity="0.15"/>
+                  <stop offset="0.45" stop-color="var(--accent)" stop-opacity="1"/>
+                  <stop offset="1" stop-color="#b9ff6a" stop-opacity="0.85"/>
+                </linearGradient>
+              </defs>
+              <rect class="mini-canvas" x="22" y="18" width="88" height="66" rx="12"/>
+              <path class="paint-swoosh" d="M34 66 C50 34 78 85 98 42 C108 22 128 32 136 50"/>
+              <circle class="paint-drop drop-one" cx="43" cy="35" r="4"/>
+              <circle class="paint-drop drop-two" cx="83" cy="28" r="3"/>
+              <circle class="paint-drop drop-three" cx="69" cy="73" r="3.5"/>
+              <g class="brush-tool">
+                <path d="M113 83 L140 56" class="brush-handle"/>
+                <path d="M102 94 C109 84 114 80 121 82 C116 91 111 96 102 94Z" class="brush-tip"/>
               </g>
             </svg>
           </div>
-          <div class="hobby-name">绘画</div>
-          <div class="hobby-desc">业余爱好，享受用线条与色彩表达的过程。虽然技法不算专业，但这是我在代码之外保持创造力的一种方式。</div>
+          <div class="hobby-copy">
+            <div class="hobby-kicker">VISUAL THINKING</div>
+            <div class="hobby-name">??</div>
+            <div class="hobby-desc">??????????????????????????????????????????</div>
+          </div>
         </div>
         <div class="hobby-card fade-up" data-hobby="guitar">
-          <div class="hobby-icon">
-            <svg viewBox="0 0 24 24">
-              <g class="icon-group">
-                <path d="M9 18V5l12-2v13" class="icon-stem"/>
-                <circle cx="6" cy="18" r="3" class="icon-note1"/>
-                <circle cx="18" cy="16" r="3" class="icon-note2"/>
+          <div class="hobby-orb orb-a"></div>
+          <div class="hobby-orb orb-b"></div>
+          <div class="hobby-stage guitar-stage" aria-hidden="true">
+            <svg viewBox="0 0 160 120" class="hobby-art">
+              <path class="sound-wave wave-one" d="M34 35 C20 50 20 70 34 85"/>
+              <path class="sound-wave wave-two" d="M126 35 C140 50 140 70 126 85"/>
+              <g class="guitar-body">
+                <path class="guitar-shape" d="M68 35 C51 36 43 50 50 63 C38 72 44 91 60 92 C69 93 73 88 80 88 C87 88 91 93 100 92 C116 91 122 72 110 63 C117 50 109 36 92 35 C86 34 83 39 80 43 C77 39 74 34 68 35Z"/>
+                <circle class="sound-hole" cx="80" cy="65" r="9"/>
+                <path class="guitar-neck" d="M90 43 L124 18"/>
+                <path class="guitar-head" d="M121 14 L135 20 L128 29"/>
+                <path class="string string-one" d="M61 67 L126 20"/>
+                <path class="string string-two" d="M68 72 L130 25"/>
+                <path class="string string-three" d="M76 77 L134 30"/>
+                <path class="pick" d="M52 39 C66 43 70 55 58 65 C50 57 47 47 52 39Z"/>
               </g>
             </svg>
           </div>
-          <div class="hobby-name">吉他</div>
-          <div class="hobby-desc">偶尔拨弄几首曲子，纯粹的兴趣。音乐带来的节奏感有时也会影响我对代码结构的思考。</div>
+          <div class="hobby-copy">
+            <div class="hobby-kicker">RHYTHM & FLOW</div>
+            <div class="hobby-name">??</div>
+            <div class="hobby-desc">???????????????????????????????????????????</div>
+          </div>
         </div>
         <div class="hobby-card fade-up" data-hobby="doc">
-          <div class="hobby-icon">
-            <svg viewBox="0 0 24 24">
-              <g class="icon-group">
-                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" class="icon-page"/>
-                <polyline points="14 2 14 8 20 8" class="icon-fold"/>
-                <line x1="16" y1="13" x2="8" y2="13" class="icon-line1"/>
-                <line x1="16" y1="17" x2="8" y2="17" class="icon-line2"/>
-                <polyline points="10 9 9 9 8 9" class="icon-dots"/>
+          <div class="hobby-orb orb-a"></div>
+          <div class="hobby-orb orb-b"></div>
+          <div class="hobby-stage doc-stage" aria-hidden="true">
+            <svg viewBox="0 0 160 120" class="hobby-art">
+              <g class="doc-stack">
+                <rect class="doc-shadow-page" x="42" y="30" width="66" height="66" rx="8"/>
+                <rect class="doc-back-page" x="49" y="24" width="66" height="66" rx="8"/>
+                <path class="doc-front-page" d="M58 18 H101 L121 38 V94 C121 99 118 102 113 102 H58 C53 102 50 99 50 94 V26 C50 21 53 18 58 18Z"/>
+                <path class="doc-corner" d="M101 18 V38 H121"/>
+                <path class="doc-line line-one" d="M64 52 H105"/>
+                <path class="doc-line line-two" d="M64 65 H111"/>
+                <path class="doc-line line-three" d="M64 78 H94"/>
+                <path class="doc-check" d="M66 36 L73 43 L88 28"/>
+                <rect class="scan-bar" x="54" y="47" width="62" height="8" rx="4"/>
               </g>
             </svg>
           </div>
-          <div class="hobby-name">文档与写作</div>
-          <div class="hobby-desc">具备较强的文档撰写能力，在项目开发中习惯性输出需求分析、技术方案、架构设计文档，确保知识与决策可追溯。</div>
+          <div class="hobby-copy">
+            <div class="hobby-kicker">CLEAR RECORDS</div>
+            <div class="hobby-name">?????</div>
+            <div class="hobby-desc">?????????????????????????????????????????????</div>
+          </div>
         </div>
       </div>
     </section>
@@ -708,52 +737,39 @@ onMounted(() => {
     });
   }, 5000);
 
-  // ============ HOBBY ICON ANIMATIONS (GSAP) ============
+  // ============ HOBBY MICRO-STAGES (GSAP) ============
   document.querySelectorAll('.hobby-card').forEach(card => {
-    const icon = card.querySelector('.icon-group');
-    if (!icon) return;
-    const hobby = card.dataset.hobby;
-    const svg = icon.closest('svg');
+    const art = card.querySelector('.hobby-art');
+    const orbs = card.querySelectorAll('.hobby-orb');
+    const tl = gsap.timeline({ paused: true, defaults: { ease: 'power2.out' } });
 
-    // Build per-hobby timeline
-    const tl = gsap.timeline({ paused: true });
+    tl.to(card, { y: -10, duration: 0.35 }, 0)
+      .to(art, { scale: 1.08, rotate: -1.5, duration: 0.45 }, 0)
+      .to(orbs, { opacity: 1, scale: 1.6, duration: 0.45, stagger: 0.05 }, 0);
 
-    switch (hobby) {
-      case 'paint':
-        // 调色板浮动 + 颜料点交替脉冲 + 笔刷轻摆
-        tl.to(icon, { y: -3, duration: 2, yoyo: true, repeat: -1, ease: "sine.inOut" }, 0)
-          .to(icon.querySelector('.icon-dot1'), { scale: 1.4, duration: 0.5, yoyo: true, repeat: -1, ease: "power1.inOut" }, 0)
-          .to(icon.querySelector('.icon-dot2'), { scale: 1.4, duration: 0.5, yoyo: true, repeat: -1, ease: "power1.inOut", delay: 0.15 }, 0)
-          .to(icon.querySelector('.icon-dot3'), { scale: 1.4, duration: 0.5, yoyo: true, repeat: -1, ease: "power1.inOut", delay: 0.3 }, 0)
-          .to(icon.querySelector('.icon-dot4'), { scale: 1.4, duration: 0.5, yoyo: true, repeat: -1, ease: "power1.inOut", delay: 0.2 }, 0)
-          .to(icon.querySelector('.icon-dot5'), { scale: 1.4, duration: 0.5, yoyo: true, repeat: -1, ease: "power1.inOut", delay: 0.1 }, 0)
-          .to([icon.querySelector('.icon-brush'), icon.querySelector('.icon-brush-tip')], { rotation: 3, duration: 1.5, yoyo: true, repeat: -1, ease: "sine.inOut", transformOrigin: "18px 22px" }, 0);
-        break;
-
-      case 'guitar':
-        // 音符弹跳 + 声波扩散
-        tl.to(icon.querySelector('.icon-note1'), { y: -4, duration: 0.4, yoyo: true, repeat: -1, ease: "power1.inOut" }, 0)
-          .to(icon.querySelector('.icon-note2'), { y: -3, duration: 0.35, yoyo: true, repeat: -1, ease: "power1.inOut", delay: 0.1 }, 0)
-          .to(icon.querySelector('.icon-stem'), { x: 1, duration: 0.5, yoyo: true, repeat: -1, ease: "sine.inOut" }, 0);
-        break;
-
-      case 'doc':
-        // 文件翻折 + 文字逐行滑入
-        tl.fromTo(icon.querySelector('.icon-fold'), { x: 4, y: -4 }, { x: 0, y: 0, duration: 0.6, ease: "power2.out", repeat: -1, repeatDelay: 2 }, 0)
-          .fromTo(icon.querySelector('.icon-line1'), { x: -6, opacity: 0 }, { x: 0, opacity: 1, duration: 0.4, ease: "power2.out", repeat: -1, repeatDelay: 2.2 }, 0.15)
-          .fromTo(icon.querySelector('.icon-line2'), { x: -4, opacity: 0 }, { x: 0, opacity: 1, duration: 0.35, ease: "power2.out", repeat: -1, repeatDelay: 2.3 }, 0.25)
-          .fromTo(icon.querySelector('.icon-dots'), { opacity: 0 }, { opacity: 1, duration: 0.25, repeat: -1, repeatDelay: 2.5 }, 0.35);
-        break;
+    if (card.dataset.hobby === 'paint') {
+      tl.fromTo(card.querySelector('.paint-swoosh'), { strokeDashoffset: 190 }, { strokeDashoffset: 0, duration: 0.9 }, 0)
+        .to(card.querySelector('.brush-tool'), { x: 8, y: -8, rotate: 10, duration: 0.55 }, 0.05)
+        .to(card.querySelectorAll('.paint-drop'), { scale: 1.45, opacity: 1, duration: 0.35, stagger: 0.08 }, 0.18);
     }
 
-    // Hover: play + glow
-    card.addEventListener('mouseenter', () => {
-      tl.play();
-      gsap.to(svg, { filter: 'drop-shadow(0 0 12px var(--accent-glow))', duration: 0.3 });
-    });
+    if (card.dataset.hobby === 'guitar') {
+      tl.to(card.querySelectorAll('.string'), { scaleY: 1.45, transformOrigin: '50% 50%', duration: 0.18, yoyo: true, repeat: 3, stagger: 0.04 }, 0)
+        .to(card.querySelector('.pick'), { x: 20, y: 18, rotate: 28, duration: 0.45 }, 0.02)
+        .to(card.querySelectorAll('.sound-wave'), { opacity: 1, scale: 1.15, duration: 0.5, stagger: 0.08 }, 0.1);
+    }
+
+    if (card.dataset.hobby === 'doc') {
+      tl.to(card.querySelector('.scan-bar'), { y: 35, opacity: 0.8, duration: 0.75 }, 0)
+        .fromTo(card.querySelectorAll('.doc-line'), { strokeDashoffset: 55 }, { strokeDashoffset: 0, duration: 0.55, stagger: 0.12 }, 0.08)
+        .to(card.querySelector('.doc-check'), { scale: 1.18, duration: 0.25, yoyo: true, repeat: 1, transformOrigin: '50% 50%' }, 0.2);
+    }
+
+    card.addEventListener('mouseenter', () => tl.restart());
     card.addEventListener('mouseleave', () => {
-      tl.pause();
-      gsap.to(svg, { filter: 'drop-shadow(0 0 0px transparent)', duration: 0.4 });
+      gsap.to(card, { y: 0, duration: 0.35, ease: 'power2.out' });
+      gsap.to(art, { scale: 1, rotate: 0, duration: 0.35, ease: 'power2.out' });
+      gsap.to(orbs, { opacity: 0.35, scale: 1, duration: 0.35 });
     });
   });
 });
@@ -1022,15 +1038,81 @@ body {
 .cert-org { font-size:.85rem; color:var(--text-dim); }
 
 /* ============ HOBBIES ============ */
-.hobbies-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; }
-.hobby-card { background:var(--bg-card); border:1px solid var(--border); padding:32px; transition:all .4s; text-align:center; position:relative; isolation:isolate; }
-.hobby-card:hover { border-color:var(--accent); }
-.hobby-icon {
-  width:56px; height:56px; margin:0 auto 16px; display:flex; align-items:center; justify-content:center;
+.hobbies-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+.hobby-card {
+  min-height:360px; padding:0; overflow:hidden; text-align:left; position:relative; isolation:isolate;
+  background:
+    radial-gradient(circle at 18% 16%, var(--accent-dim), transparent 26%),
+    linear-gradient(145deg, rgba(255,255,255,.045), transparent 34%),
+    var(--bg-card);
+  border:1px solid var(--border); transition:border-color .35s, box-shadow .35s, transform .35s;
 }
-.hobby-icon svg { width:48px; height:48px; stroke:var(--accent); fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
-.hobby-name { font-family:var(--font-mono); font-size:.9rem; color:var(--accent); margin-bottom:8px; letter-spacing:.1em; }
-.hobby-desc { color:var(--text-dim); font-size:.9rem; }
+.hobby-card::before { display:none; }
+.hobby-card::after {
+  content:''; position:absolute; inset:14px; width:auto; height:auto; border-radius:18px;
+  border:1px solid rgba(255,255,255,.05); background:transparent; box-shadow:none; z-index:-1;
+}
+.hobby-card:hover { border-color:var(--border-accent); box-shadow:0 20px 60px rgba(0,0,0,.28), 0 0 34px var(--accent-dim); }
+.hobby-card:hover::after { animation:none; background:transparent; box-shadow:inset 0 0 28px var(--accent-dim); }
+.hobby-orb {
+  position:absolute; width:120px; height:120px; border-radius:50%; opacity:.35; filter:blur(22px);
+  background:radial-gradient(circle, var(--accent-glow), transparent 68%); pointer-events:none;
+}
+.hobby-orb.orb-a { top:-38px; right:-34px; }
+.hobby-orb.orb-b { bottom:-46px; left:-38px; transform:scale(.72); }
+.hobby-stage {
+  height:172px; margin:18px 18px 0; border-radius:22px; position:relative; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+  background:
+    linear-gradient(135deg, rgba(23,247,0,.09), transparent 35%),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0 1px, transparent 1px 12px),
+    rgba(255,255,255,.025);
+  border:1px solid rgba(255,255,255,.055);
+}
+.hobby-stage::before {
+  content:''; position:absolute; inset:-40%; opacity:.22;
+  background:conic-gradient(from 110deg, transparent, var(--accent-glow), transparent 35%);
+  animation:hobbyHalo 7s linear infinite;
+}
+.hobby-art { width:78%; max-width:190px; height:138px; position:relative; z-index:1; overflow:visible; }
+.hobby-art * { vector-effect:non-scaling-stroke; }
+.hobby-copy { padding:24px 28px 30px; position:relative; z-index:1; }
+.hobby-kicker { font-family:var(--font-mono); font-size:.68rem; color:var(--text-dim); letter-spacing:.24em; margin-bottom:10px; }
+.hobby-name { font-family:var(--font-mono); font-size:1rem; color:var(--accent); margin-bottom:10px; letter-spacing:.14em; }
+.hobby-desc { color:var(--text-dim); font-size:.92rem; line-height:1.9; }
+.mini-canvas, .guitar-shape, .doc-front-page { fill:rgba(23,247,0,.06); stroke:var(--accent); stroke-width:2.5; }
+.paint-swoosh { fill:none; stroke:url(#paintStroke); stroke-width:7; stroke-linecap:round; stroke-dasharray:190; stroke-dashoffset:60; filter:drop-shadow(0 0 8px var(--accent-glow)); }
+.paint-drop { fill:var(--accent); opacity:.65; transform-box:fill-box; transform-origin:center; animation:paintFloat 3.2s ease-in-out infinite; }
+.drop-two { animation-delay:.35s; } .drop-three { animation-delay:.7s; }
+.brush-handle { stroke:var(--text); stroke-width:7; stroke-linecap:round; opacity:.82; }
+.brush-tip { fill:var(--accent); stroke:var(--accent); stroke-width:2; filter:drop-shadow(0 0 8px var(--accent-glow)); }
+.brush-tool { transform-origin:120px 76px; animation:brushIdle 4s ease-in-out infinite; }
+.sound-wave { fill:none; stroke:var(--accent); stroke-width:2; opacity:.35; stroke-linecap:round; transform-origin:80px 60px; animation:soundBreath 2.4s ease-in-out infinite; }
+.wave-two { animation-delay:.3s; }
+.guitar-shape { filter:drop-shadow(0 0 12px var(--accent-glow)); }
+.sound-hole { fill:var(--bg); stroke:var(--accent); stroke-width:2; }
+.guitar-neck, .guitar-head { fill:none; stroke:var(--accent); stroke-width:5; stroke-linecap:round; stroke-linejoin:round; }
+.string { fill:none; stroke:var(--text); stroke-width:1.3; opacity:.75; transform-box:fill-box; transform-origin:center; stroke-dasharray:80; animation:stringPulse 1.8s ease-in-out infinite; }
+.string-two { animation-delay:.16s; } .string-three { animation-delay:.32s; }
+.pick { fill:var(--accent); opacity:.9; filter:drop-shadow(0 0 8px var(--accent-glow)); transform-origin:center; animation:pickHover 3s ease-in-out infinite; }
+.doc-shadow-page, .doc-back-page { fill:rgba(255,255,255,.035); stroke:rgba(255,255,255,.14); stroke-width:1.4; }
+.doc-front-page { filter:drop-shadow(0 0 12px var(--accent-glow)); }
+.doc-corner, .doc-line, .doc-check { fill:none; stroke:var(--accent); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+.doc-line { stroke:var(--text); opacity:.72; stroke-dasharray:55; animation:docLine 3s ease-in-out infinite; }
+.line-two { animation-delay:.18s; } .line-three { animation-delay:.36s; }
+.doc-check { filter:drop-shadow(0 0 8px var(--accent-glow)); }
+.scan-bar { fill:var(--accent); opacity:.16; filter:blur(.2px); animation:scanDoc 2.8s ease-in-out infinite; }
+@keyframes hobbyHalo { to { transform:rotate(1turn); } }
+@keyframes paintFloat { 50% { transform:translateY(-5px) scale(1.18); opacity:1; } }
+@keyframes brushIdle { 50% { transform:translate(4px,-5px) rotate(5deg); } }
+@keyframes soundBreath { 50% { transform:scale(1.08); opacity:.9; } }
+@keyframes stringPulse { 50% { transform:scaleY(1.28); opacity:1; } }
+@keyframes pickHover { 50% { transform:translate(7px,6px) rotate(14deg); } }
+@keyframes docLine { 50% { opacity:1; stroke-dashoffset:-10; } }
+@keyframes scanDoc { 0%,100% { transform:translateY(-2px); opacity:.05; } 50% { transform:translateY(34px); opacity:.42; } }
+@media (max-width:980px) {
+  .hobbies-grid { grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+}
 
 /* ============ CONTACT ============ */
 .contact-links { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; }
@@ -1079,6 +1161,9 @@ body {
   .about-grid,.project { grid-template-columns:1fr; }
   .project-visual { min-height:160px; }
   .contact-links { flex-direction:column; align-items:center; }
+  .hobbies-grid { grid-template-columns:1fr; }
+  .hobby-card { min-height:330px; }
+  .hobby-stage { height:150px; }
 }
 
 .growth-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
