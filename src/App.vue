@@ -239,7 +239,7 @@ onUnmounted(() => {
   <main ref="root" class="portfolio-shell">
     <div class="page-noise"></div>
     <nav class="site-nav" aria-label="页面导航">
-      <a class="brand-mark" href="#hero" aria-label="返回首页">YIWU</a>
+      <a class="brand-mark" href="#hero" aria-label="返回首页">LI XIANG</a>
       <div class="nav-links">
         <a v-for="item in navItems" :key="item.href" :href="item.href">{{ item.label }}</a>
       </div>
@@ -249,8 +249,8 @@ onUnmounted(() => {
       <div class="hero-layout">
         <div class="hero-content">
           <p class="hero-kicker">PERSONAL DOSSIER / BLOCKCHAIN ENGINEERING</p>
-          <h1 class="hero-title">易武</h1>
-          <p class="hero-name">YI WU</p>
+          <h1 class="hero-title">李翔</h1>
+          <p class="hero-name">LI XIANG</p>
           <p class="hero-role">区块链开发者 / 分布式系统实践 / 智能合约工程</p>
           <p class="hero-copy">专注于将链上逻辑、系统设计与工程实现落到可运行的项目中。</p>
           <div class="hero-actions" aria-label="主要操作">
