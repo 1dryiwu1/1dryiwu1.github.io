@@ -1,1193 +1,1342 @@
-<template>
-  <div class="portfolio-app">
-    <!-- Custom Cursor -->
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
-    <div class="noise"></div>
-    <div class="scanlines"></div>
-
-    <!-- ============ PARTICLE CANVAS ============ -->
-    <canvas id="particleCanvas" style="position:fixed;inset:0;pointer-events:none;z-index:101;"></canvas>
-
-    <!-- ============ LANDING PAGE ============ -->
-    <div class="landing" id="landing">
-      <div class="landing-content">
-        <div class="landing-eyeball" id="eyeball">
-          <div class="pupil" id="pupil"></div>
-        </div>
-        <h1 class="landing-title glitch" data-text="ABOUT ME">ABOUT ME</h1>
-        <p class="landing-subtitle">区块链开发者 · 重庆工程学院 · 专业前 5%</p>
-        <a href="#" class="landing-enter" id="enterBtn">ENTER</a>
-      </div>
-    </div>
-
-    <!-- ============ NAVIGATION ============ -->
-    <nav class="nav" id="nav" style="opacity:0; pointer-events:none;">
-      <div class="nav-logo">PORTFOLIO</div>
-      <ul class="nav-links">
-        <li><a href="#about">关于</a></li>
-        <li><a href="#skills">技能</a></li>
-        <li><a href="#projects">项目</a></li>
-        <li><a href="#timeline">经历</a></li>
-        <li><a href="#certs">证书</a></li>
-        <li><a href="#more">更多</a></li>
-        <li><a href="#growth">成长</a></li>
-        <li><label class="theme-switch" title="切换白天/黑夜模式">
-          <input type="checkbox" id="themeToggle">
-          <span class="theme-slider">
-            <span class="circle">
-              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
-            </span>
-          </span>
-        </label></li>
-      </ul>
-    </nav>
-
-    <!-- ============ ABOUT ============ -->
-    <section class="section" id="about">
-      <div class="section-tag">// 01. PROFILE</div>
-      <h2 class="section-title fade-up">关于我</h2>
-      <div class="about-grid">
-        <div class="about-text fade-up">
-          <p>重庆工程学院区块链工程专业大二在读，专业排名前 5%。对分布式系统与智能合约开发有浓厚兴趣，注重将理论转化为可落地的工程实践。</p>
-          <p>在课余时间，我爱好绘画和吉他——虽然都不是专业水平，但它们让我在工作之外保持创造力和节奏感。</p>
-          <div class="about-highlights">
-            <div class="highlight-item">
-              <div class="highlight-num">2+</div>
-              <div class="highlight-label">主导项目</div>
-            </div>
-            <div class="highlight-item">
-              <div class="highlight-num">4</div>
-              <div class="highlight-label">获奖证书</div>
-            </div>
-            <div class="highlight-item">
-              <div class="highlight-num">5%</div>
-              <div class="highlight-label">专业排名</div>
-            </div>
-            <div class="highlight-item">
-              <div class="highlight-num">AI</div>
-              <div class="highlight-label">深度用户</div>
-            </div>
-          </div>
-        </div>
-        <div class="about-text fade-up">
-          <p><strong style="color:var(--accent)">电话</strong><br>17883563946</p>
-          <p><strong style="color:var(--accent)">邮箱</strong><br>2489555099@qq.com</p>
-          <p><strong style="color:var(--accent)">GitHub</strong><br>github.com/1dryiwu1</p>
-          <p><strong style="color:var(--accent)">学校</strong><br>重庆工程学院 · 区块链工程</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ SKILLS ============ -->
-    <section class="section" id="skills" style="background:var(--bg-alt);">
-      <div class="section-tag">// 02. TECH STACK</div>
-      <h2 class="section-title fade-up">技术栈与能力</h2>
-      <div class="skills-grid">
-        <div class="skill-group fade-up">
-          <div class="skill-group-name">编程语言</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Go</span><span class="skill-tag">Solidity</span><span class="skill-tag">Python</span><span class="skill-tag">JavaScript</span>
-          </div>
-        </div>
-        <div class="skill-group fade-up">
-          <div class="skill-group-name">区块链</div>
-          <div class="skill-tags">
-            <span class="skill-tag">以太坊</span><span class="skill-tag">智能合约</span><span class="skill-tag">Raft</span><span class="skill-tag">Truffle</span><span class="skill-tag">Ganache</span>
-          </div>
-        </div>
-        <div class="skill-group fade-up">
-          <div class="skill-group-name">后端 & 前端</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Gin</span><span class="skill-tag">P2P</span><span class="skill-tag">RESTful API</span><span class="skill-tag">Vue 3</span><span class="skill-tag">Element Plus</span>
-          </div>
-        </div>
-        <div class="skill-group fade-up">
-          <div class="skill-group-name">算法</div>
-          <div class="skill-tags">
-            <span class="skill-tag">BFS</span><span class="skill-tag">DFS</span><span class="skill-tag">DP</span><span class="skill-tag">背包</span><span class="skill-tag">图论</span><span class="skill-tag">贪心</span>
-          </div>
-        </div>
-        <div class="skill-group fade-up">
-          <div class="skill-group-name">AI 工具链</div>
-          <div class="skill-tags">
-            <span class="skill-tag">Claude</span><span class="skill-tag">Codex</span><span class="skill-tag">Gemini Pro</span><span class="skill-tag">AI Workflow</span>
-          </div>
-        </div>
-        <div class="skill-group fade-up">
-          <div class="skill-group-name">软技能</div>
-          <div class="skill-tags">
-            <span class="skill-tag">文档撰写</span><span class="skill-tag">问题定位</span><span class="skill-tag">技术方案</span><span class="skill-tag">团队协作</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ AI EXPERIENCE ============ -->
-    <section class="section" style="padding-top:0;">
-      <div class="section-tag">// 03. AI EXPERTISE</div>
-      <h2 class="section-title fade-up">AI 工具深度使用经验</h2>
-      <p class="fade-up" style="color:var(--text-dim); max-width:800px; margin-bottom:30px;">
-        我是 AI 工具的深度使用者，在日常开发和学习中建立了成熟的工作流。
-        购买了 Gemini Pro 会员，熟练使用 Claude、Codex 等主流 AI 平台，
-        在代码生成、问题诊断、文档撰写和方案设计等环节形成了高效的 AI 协作模式。
-      </p>
-      <div class="skills-grid fade-up">
-        <div class="skill-group">
-          <div class="skill-group-name">Claude</div>
-          <div class="skill-tags">
-            <span class="skill-tag">文档撰写</span><span class="skill-tag">代码审查</span><span class="skill-tag">方案设计</span><span class="skill-tag">问题分析</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-name">Codex / WorkBuddy</div>
-          <div class="skill-tags">
-            <span class="skill-tag">项目构建</span><span class="skill-tag">自动化</span><span class="skill-tag">环境配置</span><span class="skill-tag">前端开发</span>
-          </div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-name">Gemini Pro</div>
-          <div class="skill-tags">
-            <span class="skill-tag">多模态</span><span class="skill-tag">研究分析</span><span class="skill-tag">学习辅助</span><span class="skill-tag">知识整理</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ PROJECTS ============ -->
-    <section class="section" id="projects" style="background:var(--bg-alt);">
-      <div class="section-tag">// 04. PROJECTS</div>
-      <h2 class="section-title fade-up">项目经历</h2>
-
-      <div class="project fade-up">
-        <div class="project-visual"><div class="project-icon">RAFT</div></div>
-        <div class="project-body">
-          <div class="project-meta">2026.03 — 2026.04 · 项目负责人</div>
-          <h3 class="project-name">MedTrust-Raft 医疗数据联盟治理平台</h3>
-          <p class="project-desc">面向多医疗机构可信数据共享场景，从零实现基于 Raft 共识机制的联盟链系统，解决中心化医疗数据库的单点故障与数据篡改风险。</p>
-          <ul class="project-features">
-            <li>独立用 Go 实现 Raft 核心算法（Leader 选举、日志复制、心跳维持），Leader 故障后毫秒级重选</li>
-            <li>设计四层解耦架构：P2P 通信层 / Raft 共识层 / 区块存储层 / API 服务层</li>
-            <li>后端 Gin + BoltDB，前端 Vue 3 + Element Plus，实现联盟接入、数据存证、多端查询</li>
-            <li>系统演示覆盖正常共识、Leader 故障转移、链上数据防篡改等场景</li>
-          </ul>
-          <div class="project-tech">
-            <span>Go</span><span>Raft</span><span>Vue 3</span><span>Gin</span><span>BoltDB</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="project fade-up">
-        <div class="project-visual"><div class="project-icon">SC</div></div>
-        <div class="project-body">
-          <div class="project-meta">2026.04 — 2026.05 · 项目负责人</div>
-          <h3 class="project-name">公益众筹智能合约</h3>
-          <p class="project-desc">基于以太坊的去中心化众筹合约，将资金流转逻辑全程上链，消除中间方信任风险。</p>
-          <ul class="project-features">
-            <li>自动化目标验证与条件执行：达标自动拨款、未达标自动退款</li>
-            <li>创新里程碑分批释放资金模型，降低一次性拨付的跑路风险</li>
-            <li>Checks-Effects-Interactions 模式防御重入攻击，多角色权限管理</li>
-            <li>覆盖 9 大核心业务场景，经需求评审全部通过验收</li>
-          </ul>
-          <div class="project-tech">
-            <span>Solidity</span><span>Ethereum</span><span>Truffle</span><span>Ganache</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="project fade-up">
-        <div class="project-visual"><div class="project-icon">ETH</div></div>
-        <div class="project-body">
-          <div class="project-meta">2025.10 — 2025.11 · 独立完成</div>
-          <h3 class="project-name">以太坊私有链搭建</h3>
-          <p class="project-desc">为后续智能合约开发建立本地可控测试环境，独立完成以太坊私有链从零到可用的全流程搭建。</p>
-          <ul class="project-features">
-            <li>创世块参数配置、多节点组网及挖矿参数调优</li>
-            <li>为 MedTrust-Raft 和公益众筹合约的开发调试提供基础环境</li>
-          </ul>
-          <div class="project-tech">
-            <span>Ethereum</span><span>Geth</span><span>Private Chain</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-divider"><hr></div>
-
-    <!-- ============ TIMELINE ============ -->
-    <section class="section" id="timeline">
-      <div class="section-tag">// 05. JOURNEY</div>
-      <h2 class="section-title fade-up">成长时间线</h2>
-      <p class="fade-up" style="color:var(--text-dim); max-width:600px; margin-bottom:40px;">
-        每一段经历都是未来的基石。随着大学生活的推进，这里会持续记录我的成长足迹。
-      </p>
-      <div class="timeline fade-up">
-        <div class="timeline-item active">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">2026.05</div>
-          <div class="timeline-title">挑战杯校赛三等奖</div>
-          <div class="timeline-desc">作品《红盾维安》，第十五届重庆工程学院挑战杯</div>
-        </div>
-        <div class="timeline-item active">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">2026.04</div>
-          <div class="timeline-title">公益众筹智能合约项目</div>
-          <div class="timeline-desc">独立设计并实现以太坊去中心化众筹合约，覆盖 9 大核心场景</div>
-        </div>
-        <div class="timeline-item active">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">2026.03</div>
-          <div class="timeline-title">MedTrust-Raft 项目启动</div>
-          <div class="timeline-desc">从零实现 Raft 共识引擎，构建医疗数据联盟治理平台</div>
-        </div>
-        <div class="timeline-item active">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">2025.12</div>
-          <div class="timeline-title">区块链创新大赛一等奖 & 数学竞赛三等奖</div>
-          <div class="timeline-desc">第四届重庆市大学生区块链技术应用创新大赛 + 第十七届全国大学生数学竞赛</div>
-        </div>
-        <div class="timeline-item active">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">2025.10</div>
-          <div class="timeline-title">以太坊私有链搭建</div>
-          <div class="timeline-desc">独立完成从零到可用的全流程私有链搭建</div>
-        </div>
-        <div class="timeline-item active">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">2025.09</div>
-          <div class="timeline-title">区块链创客协会成立</div>
-          <div class="timeline-desc">与两名同学共同创办协会，担任第二负责人</div>
-        </div>
-        <div class="timeline-item active">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">2024.09</div>
-          <div class="timeline-title">入学重庆工程学院</div>
-          <div class="timeline-desc">区块链工程专业，开启大学生涯</div>
-        </div>
-        <!-- ===== 未来占位：新增经历请在此区域插入 ===== -->
-        <div class="timeline-item upcoming">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">预计 2026 暑期</div>
-          <div class="timeline-title">暑期实习计划</div>
-          <div class="timeline-desc">寻找区块链开发实习机会，积累工程实战经验</div>
-        </div>
-        <div class="timeline-item upcoming">
-          <div class="timeline-dot"></div>
-          <div class="timeline-date">2026 — 2028</div>
-          <div class="timeline-title">持续积累 · 未完待续</div>
-          <div class="timeline-desc">更多项目、竞赛、实习经历将在大学期间不断丰富</div>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-divider"><hr></div>
-
-    <!-- ============ CERTIFICATES ============ -->
-    <section class="section" id="certs">
-      <div class="section-tag">// 06. HONORS</div>
-      <h2 class="section-title fade-up">获奖证书</h2>
-      <div class="certs-grid">
-        <div class="cert-card fade-up">
-          <img src="/assets/cert-blockchain.jpg" alt="区块链创新大赛一等奖">
-          <div class="cert-info">
-            <div class="cert-date">2025.12</div>
-            <div class="cert-name">重庆市区块链创新大赛 · 一等奖</div>
-            <div class="cert-org">重庆市教育委员会 · 本科组 · 第四届</div>
-          </div>
-        </div>
-        <div class="cert-card fade-up">
-          <img src="/assets/cert-math.jpg" alt="数学竞赛三等奖">
-          <div class="cert-info">
-            <div class="cert-date">2025.12</div>
-            <div class="cert-name">全国大学生数学竞赛 · 三等奖</div>
-            <div class="cert-org">中国数学会 · 非数学A类 · 第十七届</div>
-          </div>
-        </div>
-        <div class="cert-card fade-up">
-          <img src="/assets/cert-challenge.jpg" alt="挑战杯三等奖">
-          <div class="cert-info">
-            <div class="cert-date">2026.03</div>
-            <div class="cert-name">挑战杯校赛 · 三等奖</div>
-            <div class="cert-org">重庆工程学院 · 第十五届 · 红盾维安</div>
-          </div>
-        </div>
-        <div class="cert-card fade-up">
-          <div class="cert-info">
-            <div class="cert-date">2025 学年</div>
-            <div class="cert-name">校级奖学金 · 三等奖</div>
-            <div class="cert-org">重庆工程学院</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ MORE ABOUT ME ============ -->
-    <section class="section" id="more" style="background:var(--bg-alt);">
-      <div class="section-tag">// 07. BEYOND CODE</div>
-      <h2 class="section-title fade-up">代码之外</h2>
-      <div class="hobbies-grid">
-        <div class="hobby-card fade-up" data-hobby="paint">
-          <div class="hobby-orb orb-a"></div>
-          <div class="hobby-orb orb-b"></div>
-          <div class="hobby-stage paint-stage" aria-hidden="true">
-            <svg viewBox="0 0 160 120" class="hobby-art">
-              <defs>
-                <linearGradient id="paintStroke" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="var(--accent)" stop-opacity="0.15"/>
-                  <stop offset="0.45" stop-color="var(--accent)" stop-opacity="1"/>
-                  <stop offset="1" stop-color="#b9ff6a" stop-opacity="0.85"/>
-                </linearGradient>
-              </defs>
-              <rect class="mini-canvas" x="22" y="18" width="88" height="66" rx="12"/>
-              <path class="paint-swoosh" d="M34 66 C50 34 78 85 98 42 C108 22 128 32 136 50"/>
-              <circle class="paint-drop drop-one" cx="43" cy="35" r="4"/>
-              <circle class="paint-drop drop-two" cx="83" cy="28" r="3"/>
-              <circle class="paint-drop drop-three" cx="69" cy="73" r="3.5"/>
-              <g class="brush-tool">
-                <path d="M113 83 L140 56" class="brush-handle"/>
-                <path d="M102 94 C109 84 114 80 121 82 C116 91 111 96 102 94Z" class="brush-tip"/>
-              </g>
-            </svg>
-          </div>
-          <div class="hobby-copy">
-            <div class="hobby-kicker">VISUAL THINKING</div>
-            <div class="hobby-name">绘画</div>
-            <div class="hobby-desc">业余爱好，享受用线条与色彩表达的过程。虽然技法不算专业，但这是我在代码之外保持创造力的一种方式。</div>
-          </div>
-        </div>
-        <div class="hobby-card fade-up" data-hobby="guitar">
-          <div class="hobby-orb orb-a"></div>
-          <div class="hobby-orb orb-b"></div>
-          <div class="hobby-stage guitar-stage" aria-hidden="true">
-            <svg viewBox="0 0 160 120" class="hobby-art">
-              <path class="sound-wave wave-one" d="M28 41 C18 52 18 68 28 79"/>
-              <path class="sound-wave wave-two" d="M132 41 C142 52 142 68 132 79"/>
-              <g class="guitar-body">
-                <path class="guitar-shape" d="M55 35 C44 42 43 57 52 66 C42 76 46 93 62 95 C72 96 79 91 82 84 C85 91 92 96 102 95 C118 93 122 76 112 66 C121 57 120 42 109 35 C100 29 89 31 82 39 C75 31 64 29 55 35Z"/>
-                <circle class="sound-hole" cx="82" cy="66" r="7.6"/>
-                <path class="guitar-bridge" d="M68 80 H96"/>
-                <rect class="guitar-neck" x="95" y="49" width="40" height="9" rx="4.5"/>
-                <path class="guitar-head" d="M135 47 H146 Q151 47 151 52 Q151 57 146 57 H135"/>
-                <circle class="tuner tuner-a" cx="145" cy="48" r="1.5"/>
-                <circle class="tuner tuner-b" cx="149" cy="52" r="1.5"/>
-                <circle class="tuner tuner-c" cx="145" cy="56" r="1.5"/>
-                <path class="string string-one" d="M69 62 H148"/>
-                <path class="string string-two" d="M69 64 H148"/>
-                <path class="string string-three" d="M69 66 H148"/>
-                <path class="string string-four" d="M69 68 H148"/>
-                <path class="string string-five" d="M69 70 H148"/>
-                <path class="string string-six" d="M69 72 H148"/>
-                <path class="fret fret-one" d="M107 49 V58"/>
-                <path class="fret fret-two" d="M115 49 V58"/>
-                <path class="fret fret-three" d="M123 49 V58"/>
-              </g>
-            </svg>
-          </div>
-          <div class="hobby-copy">
-            <div class="hobby-kicker">RHYTHM & FLOW</div>
-            <div class="hobby-name">吉他</div>
-            <div class="hobby-desc">偶尔拨弄几首曲子，纯粹的兴趣。音乐带来的节奏感有时也会影响我对代码结构的思考。</div>
-          </div>
-        </div>
-        <div class="hobby-card fade-up" data-hobby="doc">
-          <div class="hobby-orb orb-a"></div>
-          <div class="hobby-orb orb-b"></div>
-          <div class="hobby-stage doc-stage" aria-hidden="true">
-            <svg viewBox="0 0 160 120" class="hobby-art">
-              <g class="doc-stack">
-                <rect class="doc-shadow-page" x="42" y="30" width="66" height="66" rx="8"/>
-                <rect class="doc-back-page" x="49" y="24" width="66" height="66" rx="8"/>
-                <path class="doc-front-page" d="M58 18 H101 L121 38 V94 C121 99 118 102 113 102 H58 C53 102 50 99 50 94 V26 C50 21 53 18 58 18Z"/>
-                <path class="doc-corner" d="M101 18 V38 H121"/>
-                <path class="doc-line line-one" d="M64 52 H105"/>
-                <path class="doc-line line-two" d="M64 65 H111"/>
-                <path class="doc-line line-three" d="M64 78 H94"/>
-                <path class="doc-check" d="M66 36 L73 43 L88 28"/>
-                <rect class="scan-bar" x="54" y="47" width="62" height="8" rx="4"/>
-              </g>
-            </svg>
-          </div>
-          <div class="hobby-copy">
-            <div class="hobby-kicker">CLEAR RECORDS</div>
-            <div class="hobby-name">文档与写作</div>
-            <div class="hobby-desc">具备较强的文档撰写能力，在项目开发中习惯性输出需求分析、技术方案、架构设计文档，确保知识与决策可追溯。</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ CONTACT ============ -->
-    <section class="section" style="text-align:center;">
-      <div class="section-tag">// 09. CONNECT</div>
-      <h2 class="section-title fade-up">联系我</h2>
-      <div class="contact-links fade-up">
-        <a href="tel:17883563946" class="contact-link"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 01-2.2 2c-1.9-.2-3.8-.8-5.5-1.8a16.8 16.8 0 01-7.3-7.3A13.2 13.2 0 015.5 7.4 2 2 0 017.5 5.2h3a2 2 0 012 1.7 12 12 0 00.7 2.8 2 2 0 01-.5 2.1L11 13.6a14 14 0 005.4 5.4l1.8-1.8a2 2 0 012.1-.5 12 12 0 002.8.7 2 2 0 011.7 2z"/></svg>17883563946</a>
-        <a href="mailto:2489555099@qq.com" class="contact-link"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 4 12 13 22 4"/></svg>2489555099@qq.com</a>
-        <a href="https://github.com/1dryiwu1" target="_blank" class="contact-link"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>GitHub</a>
-      </div>
-    </section>
-
-    <div class="section-divider"><hr></div>
-
-    <!-- ============ GROWTH ROADMAP: 未来扩展区 ============ -->
-    <section class="section" id="growth" style="background:var(--bg-alt);">
-      <div class="section-tag">// 08. ROADMAP</div>
-      <h2 class="section-title fade-up">成长路线</h2>
-      <p class="fade-up" style="color:var(--text-dim); max-width:600px; margin-bottom:40px;">
-        才大二，路还很长。这里会随着每一步成长而持续更新。
-      </p>
-      <!-- 
-        ===== 扩展指南 =====
-        下方每张 growth-card 是一个成长目标。
-        已完成的把 CSS 类补上 growth-done，进行中的补上 growth-now。
-        要新增目标，复制一个 growth-card 块粘贴到这里即可。
-      -->
-    <div class="growth-grid fade-up">
-        <!-- ===== 已完成 ===== -->
-        <div class="growth-card growth-done">
-          <div class="growth-status"></div>
-          <div class="growth-body">
-            <div class="growth-label">已完成</div>
-            <div class="growth-title">专业前 5%</div>
-            <div class="growth-detail">保持优异成绩，打下扎实理论基础</div>
-          </div>
-        </div>
-        <div class="growth-card growth-done">
-          <div class="growth-status"></div>
-          <div class="growth-body">
-            <div class="growth-label">已完成</div>
-            <div class="growth-title">主导 2+ 区块链项目</div>
-            <div class="growth-detail">Raft 共识系统 + 智能合约众筹平台</div>
-          </div>
-        </div>
-        <div class="growth-card growth-done">
-          <div class="growth-status"></div>
-          <div class="growth-body">
-            <div class="growth-label">已完成</div>
-            <div class="growth-title">4 项竞赛获奖</div>
-            <div class="growth-detail">区块链大赛一等奖、数学竞赛、挑战杯、校级奖学金</div>
-          </div>
-        </div>
-        <!-- ===== 进行中 ===== -->
-        <div class="growth-card growth-now">
-          <div class="growth-status"></div>
-          <div class="growth-body">
-            <div class="growth-label">进行中</div>
-            <div class="growth-title">区块链开发实习</div>
-            <div class="growth-detail">寻找暑期实习机会，积累工程实战经验</div>
-          </div>
-        </div>
-        <!-- ===== 未来：添加新目标只需复制下面的 growth-card 块 ===== -->
-        <div class="growth-card">
-          <div class="growth-status"></div>
-          <div class="growth-body">
-            <div class="growth-label">待开始</div>
-            <div class="growth-title">开源贡献</div>
-            <div class="growth-detail">参与区块链开源项目，建立技术影响力</div>
-          </div>
-        </div>
-        <div class="growth-card">
-          <div class="growth-status"></div>
-          <div class="growth-body">
-            <div class="growth-label">待开始</div>
-            <div class="growth-title">技术博客</div>
-            <div class="growth-detail">输出技术文章，沉淀知识体系</div>
-          </div>
-        </div>
-        <div class="growth-card">
-          <div class="growth-status"></div>
-          <div class="growth-body">
-            <div class="growth-label">待开始</div>
-            <div class="growth-title">更多竞赛</div>
-            <div class="growth-detail">参加更高水平竞赛，挑战技术极限</div>
-          </div>
-        </div>
-        <div class="growth-card">
-          <div class="growth-status"></div>
-          <div class="growth-body">
-            <div class="growth-label">待开始</div>
-            <div class="growth-title">持续学习</div>
-            <div class="growth-detail">深入分布式系统、密码学、零知识证明等领域</div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="footer">
-    </footer>
-  </div>
-</template>
-
 <script setup>
-import { onMounted } from 'vue';
-import gsap from 'gsap';
-import ScrollTrigger from 'gsap/ScrollTrigger';
+import { onMounted, onUnmounted, ref } from 'vue';
+import { gsap } from 'gsap';
 
-onMounted(() => {
-  // ============ PARTICLE SYSTEM (Canvas 2D 景深粒子) ============
-  (function() {
-    const canvas = document.getElementById('particleCanvas');
-    const ctx = canvas.getContext('2d');
-    let W, H, particles = [];
-    const COUNT = 80;
-    let mouseX = -999, mouseY = -999;
+const root = ref(null);
+let ctx;
+let revealObserver;
 
-    function resize() {
-      W = canvas.width = window.innerWidth;
-      H = canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
+const navItems = [
+  { label: '首页', href: '#hero' },
+  { label: '项目', href: '#projects' },
+  { label: '能力', href: '#skills' },
+  { label: '时间线', href: '#timeline' },
+  { label: '工作之外', href: '#outside' },
+  { label: '联系', href: '#contact' },
+];
 
-    // 单个粒子
-    function Particle() {
-      this.reset(true);
-    }
-    Particle.prototype.reset = function(init) {
-      // z: 景深 [0.05, 1.0] — 0.05=远景, 1.0=近景
-      this.z = 0.05 + Math.random() * 0.95;
-      var sz = 0.3 + 0.7 * this.z;     // 景深缩放因子
-      this.x = Math.random() * W;
-      this.y = init ? Math.random() * H : -20;
-      this.r = (1.5 + this.z * 3.5);   // 粒子半径: 远景小, 近景大
-      this.vx = (Math.random() - 0.5) * 0.3 * sz;  // 水平微风
-      this.vy = (0.3 + this.z * 0.8) * sz;          // 下落速度: 近快远慢
-      this.opacity = 0.15 + this.z * 0.45;           // 透明度: 近亮远淡
-      this.angle = Math.random() * Math.PI * 2;
-      this.angleSpeed = (Math.random() - 0.5) * 0.02;
-    };
+const heroMetrics = [
+  { label: 'PROJECTS', value: '03' },
+  { label: 'RANK', value: 'TOP 5%' },
+  { label: 'FOCUS', value: 'RAFT · SOLIDITY · VUE' },
+  { label: 'LOCATION', value: 'CHONGQING' },
+];
 
-    // 初始化
-    resize();
-    for (var i = 0; i < COUNT; i++) {
-      particles.push(new Particle());
-    }
+const projects = [
+  {
+    level: 'PRIMARY RECORD',
+    code: '01',
+    name: 'MedTrust-Raft',
+    title: '医疗数据联盟治理平台',
+    summary: '面向多医疗机构可信数据共享场景的联盟治理平台。',
+    detail: '基于 Raft 共识机制构建核心协作逻辑。',
+    role: '主导系统设计，并独立完成 Raft 核心机制实现。',
+    points: [
+      '从零实现 Raft 核心流程，覆盖 Leader 选举、日志复制与心跳维持等关键机制。',
+      '围绕多机构协作场景设计联盟治理架构，提升医疗数据共享过程中的可信性与一致性。',
+      '完成从共识层到服务层的整体工程串联，使系统具备可运行、可演示的完整形态。',
+    ],
+    tech: ['Go', 'Raft', 'Gin', 'BoltDB', 'Vue 3'],
+  },
+  {
+    level: 'SUPPORT RECORD',
+    code: '02',
+    name: '公益众筹智能合约',
+    summary: '基于以太坊的去中心化众筹合约实践。',
+    role: '负责合约逻辑设计与关键安全机制实现。',
+    points: [
+      '围绕众筹流程实现目标验证、自动拨款与失败退款等核心逻辑。',
+      '按里程碑拆分资金释放流程，增强资金使用的可控性与透明度。',
+      '在合约设计中引入常见安全模式，降低重入等链上风险。',
+    ],
+    tech: ['Solidity', 'Ethereum', 'Truffle', 'Ganache'],
+  },
+  {
+    level: 'SUPPORT RECORD',
+    code: '03',
+    name: 'AI 工具与技术文档实践',
+    summary: '将 AI 工具、需求分析与技术文档能力结合到开发流程中的持续实践。',
+    role: '负责方案整理、技术表达与辅助研发流程优化。',
+    points: [
+      '能够将复杂需求快速拆解为结构化方案，提高沟通与执行效率。',
+      '在项目过程中持续输出需求分析、技术方案与架构说明文档。',
+      '熟悉借助 AI 工具辅助信息整理、内容生成与开发支持，提升个人交付效率。',
+    ],
+    tech: ['AI Tools', 'Technical Writing', 'Solution Design'],
+  },
+];
 
-    // 每帧渲染前按 z 从远到近排序（画家算法）
-    function sortByZ(a, b) { return a.z - b.z; }
+const capabilityPillars = [
+  {
+    title: '分布式系统',
+    text: '围绕一致性机制、服务协作与系统设计建立技术主轴。',
+    keywords: ['Raft', '一致性机制', '服务协作', '系统设计'],
+  },
+  {
+    title: '区块链开发',
+    text: '理解链上执行逻辑，能够完成智能合约设计与测试实践。',
+    keywords: ['Solidity', 'Ethereum', '智能合约', '链上逻辑'],
+  },
+  {
+    title: '工程实现',
+    text: '关注从方案、接口、数据存储到前端表达的完整落地过程。',
+    keywords: ['Go', 'Vue 3', 'Gin', 'BoltDB'],
+  },
+];
 
-    function drawParticle(p) {
-      var isLight = document.body.classList.contains('light');
-      var r = isLight ? 11 : 23;
-      var g = isLight ? 138 : 247;
-      var b = isLight ? 58 : 0;
-      var alpha = p.opacity * 0.7;
-      // 外发光
-      var glow = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 4);
-      glow.addColorStop(0, 'rgba('+r+','+g+','+b+','+alpha+')');
-      glow.addColorStop(0.3, 'rgba('+r+','+g+','+b+','+(alpha*0.5)+')');
-      glow.addColorStop(1, 'rgba('+r+','+g+','+b+',0)');
-      ctx.fillStyle = glow;
-      ctx.fillRect(p.x - p.r * 4, p.y - p.r * 4, p.r * 8, p.r * 8);
+const skillGroups = [
+  { label: 'Languages', items: ['Go', 'Solidity', 'Python', 'JavaScript'] },
+  { label: 'Backend & Infra', items: ['Gin', 'BoltDB', '共识机制实现', '服务架构'] },
+  { label: 'Frontend', items: ['Vue 3', '交互实现', '页面工程化'] },
+  { label: 'Blockchain', items: ['Ethereum', 'Truffle', 'Ganache', '智能合约开发'] },
+];
 
-      // 核心: 旋转的小菱形
-      ctx.save();
-      ctx.translate(p.x, p.y);
-      ctx.rotate(p.angle);
-      ctx.fillStyle = 'rgba('+r+','+g+','+b+','+(alpha*1.4)+')';
-      ctx.beginPath();
-      var s = p.r;
-      ctx.moveTo(0, -s);
-      ctx.lineTo(s * 0.6, 0);
-      ctx.lineTo(0, s);
-      ctx.lineTo(-s * 0.6, 0);
-      ctx.closePath();
-      ctx.fill();
-      ctx.restore();
-    }
+const timeline = [
+  {
+    tag: 'STAGE 01',
+    title: '专业起点',
+    text: '进入区块链工程相关学习，建立对分布式系统与链上开发的基础认知。',
+  },
+  {
+    tag: 'STAGE 02',
+    title: '算法与竞赛训练',
+    text: '通过比赛和系统性训练补强问题拆解、逻辑推演和实现能力。',
+  },
+  {
+    tag: 'STAGE 03',
+    title: '项目实践阶段',
+    text: '开始把学习内容落到真实项目中，重点进入联盟治理、共识机制、智能合约等更成体系的实践。',
+  },
+  {
+    tag: 'STAGE 04',
+    title: '工程化表达与能力收束',
+    text: '不再只是做功能，而是开始关注架构、方案、文档、协作和交付质量，形成更完整的工程思维。',
+  },
+];
 
-    function updateParticle(p) {
-      // 鼠标风力场：距离平方反比排斥
-      var dx = p.x - mouseX;
-      var dy = p.y - mouseY;
-      var dist = Math.sqrt(dx * dx + dy * dy);
-      var sz = 0.3 + 0.7 * p.z;
-      var influenceRadius = 80 * sz;  // 近景影响范围大
+const outsideItems = [
+  {
+    label: '观察与视觉表达',
+    title: '绘画',
+    text: '通过线条、结构与色彩训练观察力，也让自己在技术工作之外保留视觉表达与创造性的出口。',
+  },
+  {
+    label: '节奏感与长期练习',
+    title: '吉他',
+    text: '把音乐当作调节节奏与保持专注的方式，长期的练习过程也影响了我对结构、节奏与耐心的理解。',
+  },
+  {
+    label: '表达、协作与复盘',
+    title: '文档与写作',
+    text: '习惯把需求、方案与技术决策记录清楚，让复杂问题更容易被沟通、协作与复盘。',
+  },
+];
 
-      if (dist < influenceRadius && dist > 0) {
-        var force = (1 - dist / influenceRadius) * 2.5 * sz;
-        p.vx += (dx / dist) * force;
-        p.vy += (dy / dist) * force;
-      }
+const contacts = [
+  { label: 'EMAIL', value: '2489555099@qq.com', href: 'mailto:2489555099@qq.com' },
+  { label: 'PHONE', value: '17883563946', href: 'tel:17883563946' },
+  { label: 'GITHUB', value: 'github.com/1dryiwu1', href: 'https://github.com/1dryiwu1' },
+];
 
-      // 阻尼衰减（空气阻力）
-      p.vx *= 0.98;
-      p.vy *= 0.98;
+function setupRevealAnimations() {
+  const revealItems = root.value.querySelectorAll('.reveal');
 
-      // 收敛回自然漂落速度
-      var targetVx = (Math.random() - 0.5) * 0.15 * sz;
-      var targetVy = (0.3 + p.z * 0.8) * sz;
-      p.vx += (targetVx - p.vx) * 0.005;
-      p.vy += (targetVy - p.vy) * 0.005;
+  revealObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
 
-      p.x += p.vx;
-      p.y += p.vy;
-      p.angle += p.angleSpeed;
-
-      // 边界循环：超出底部或侧边就重置到顶部
-      if (p.y > H + 40 || p.x < -40 || p.x > W + 40) {
-        p.reset(false);
-        p.y = -20;
-      }
-    }
-
-    function animate() {
-      ctx.clearRect(0, 0, W, H);
-      particles.sort(sortByZ);
-      for (var i = 0; i < particles.length; i++) {
-        updateParticle(particles[i]);
-        drawParticle(particles[i]);
-      }
-      requestAnimationFrame(animate);
-    }
-
-    // 绑定鼠标（与自定义光标共用 mx, my）
-    document.addEventListener('mousemove', function(e) {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
-
-    // 进入主站后才启动
-    document.getElementById('enterBtn').addEventListener('click', function() {
-      if (!canvas._started) {
-        canvas._started = true;
-        animate();
-      }
-    });
-
-    // Landing 页也启动（预渲染）
-    setTimeout(function() {
-      if (!canvas._started) { canvas._started = true; animate(); }
-    }, 100);
-  })();
-  // ============ GSAP: REGISTER PLUGINS ============
-  gsap.registerPlugin(ScrollTrigger);
-
-  // ============ CUSTOM CURSOR (GSAP quickTo) ============
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  const qtCX = gsap.quickTo(cursor, "left", { duration: 0.08 });
-  const qtCY = gsap.quickTo(cursor, "top", { duration: 0.08 });
-  const qtRX = gsap.quickTo(ring, "left", { duration: 0.35, ease: "power2.out" });
-  const qtRY = gsap.quickTo(ring, "top", { duration: 0.35, ease: "power2.out" });
-
-  document.addEventListener('mousemove', e => {
-    qtCX(e.clientX - 10);
-    qtCY(e.clientY - 10);
-    qtRX(e.clientX - 25);
-    qtRY(e.clientY - 25);
-  });
-  document.querySelectorAll('a, button, .landing-enter, .project, .cert-card, .skill-group, .hobby-card').forEach(el => {
-    el.addEventListener('mouseenter', () => ring.classList.add('hover'));
-    el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
-  });
-
-  // ============ EYEBALL TRACKING (GSAP) ============
-  const eyeball = document.getElementById('eyeball');
-  const pupil = document.getElementById('pupil');
-  gsap.set(pupil, { xPercent: -50, yPercent: -50 });
-  const qtPX = gsap.quickTo(pupil, "x", { duration: 0.15 });
-  const qtPY = gsap.quickTo(pupil, "y", { duration: 0.15 });
-
-  eyeball.addEventListener('mousemove', e => {
-    const rect = eyeball.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    const dist = Math.min(Math.sqrt(x * x + y * y), 30);
-    const angle = Math.atan2(y, x);
-    qtPX(Math.cos(angle) * dist);
-    qtPY(Math.sin(angle) * dist);
-  });
-
-  // ============ LANDING ENTER ============
-  const landing = document.getElementById('landing');
-  const nav = document.getElementById('nav');
-  document.getElementById('enterBtn').addEventListener('click', e => {
-    e.preventDefault();
-    landing.classList.add('hidden');
-    nav.style.opacity = '1';
-    nav.style.pointerEvents = 'auto';
-    document.body.style.cursor = 'none';
-    setTimeout(() => landing.style.display='none', 800);
-  });
-
-  // ============ THEME TOGGLE ============
-  document.getElementById('themeToggle').addEventListener('change', function() {
-    document.body.classList.toggle('light', this.checked);
-  });
-
-  // ============ SMOOTH NAV ============
-  document.querySelectorAll('.nav-links a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      e.preventDefault();
-      document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth'});
-    });
-  });
-
-  // ============ SCROLL FADE (GSAP ScrollTrigger.batch) ============
-  ScrollTrigger.batch(".fade-up", {
-    onEnter: (elements) => {
-      gsap.to(elements, {
-        opacity: 1, y: 0, duration: 0.8, ease: "power2.out",
-        stagger: { each: 0.08, from: "start" }
+        gsap.to(entry.target, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.75,
+          ease: 'power3.out',
+        });
+        revealObserver.unobserve(entry.target);
       });
     },
-    start: "top 85%",
-    once: true
-  });
+    { threshold: 0.18, rootMargin: '0px 0px -8% 0px' },
+  );
 
-  ScrollTrigger.refresh();
+  revealItems.forEach((item) => revealObserver.observe(item));
+}
 
-  // ============ GLITCH REFRESH ============
-  setInterval(() => {
-    document.querySelectorAll('.glitch').forEach(el => {
-      el.style.animation = 'none';
-      el.offsetHeight;
-      el.style.animation = '';
-    });
-  }, 5000);
+onMounted(() => {
+  if (!root.value) return;
 
-  // ============ HOBBY MICRO-STAGES (GSAP) ============
-  document.querySelectorAll('.hobby-card').forEach(card => {
-    const art = card.querySelector('.hobby-art');
-    const orbs = card.querySelectorAll('.hobby-orb');
-    const tl = gsap.timeline({ paused: true, defaults: { ease: 'power2.out' } });
+  ctx = gsap.context(() => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    gsap.set('.reveal', { autoAlpha: 0, y: 28 });
 
-    tl.to(card, { y: -10, duration: 0.35 }, 0)
-      .to(art, { scale: 1.08, rotate: -1.5, duration: 0.45 }, 0)
-      .to(orbs, { opacity: 1, scale: 1.6, duration: 0.45, stagger: 0.05 }, 0);
+    gsap.timeline({ defaults: { ease: 'power3.out' } })
+      .from('.site-nav', { autoAlpha: 0, y: -16, duration: 0.6 })
+      .from('.hero-kicker, .hero-title, .hero-name, .hero-copy, .hero-actions', {
+        autoAlpha: 0,
+        y: 24,
+        duration: 0.7,
+        stagger: 0.08,
+      }, '-=0.2')
+      .from('.metric-cell', {
+        autoAlpha: 0,
+        y: 14,
+        duration: 0.5,
+        stagger: 0.06,
+      }, '-=0.15')
+      .from('.core-shell', {
+        autoAlpha: 0,
+        scale: 0.94,
+        duration: 0.8,
+      }, '-=0.55');
 
-    if (card.dataset.hobby === 'paint') {
-      tl.fromTo(card.querySelector('.paint-swoosh'), { strokeDashoffset: 190 }, { strokeDashoffset: 0, duration: 0.9 }, 0)
-        .to(card.querySelector('.brush-tool'), { x: 8, y: -8, rotate: 10, duration: 0.55 }, 0.05)
-        .to(card.querySelectorAll('.paint-drop'), { scale: 1.45, opacity: 1, duration: 0.35, stagger: 0.08 }, 0.18);
+    if (!reduceMotion) {
+      gsap.to('.core-glass', {
+        '--core-glow': 0.95,
+        duration: 2.8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+      });
+
+      gsap.to('.stabilizer', {
+        y: (index) => (index % 2 === 0 ? -8 : 8),
+        duration: 3.8,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        stagger: 0.3,
+      });
+
+      gsap.to('.scan-blade', {
+        yPercent: 230,
+        autoAlpha: 0.7,
+        duration: 3.2,
+        repeat: -1,
+        repeatDelay: 2.2,
+        ease: 'power1.inOut',
+      });
+
+      gsap.to('.signal-dot', {
+        x: 220,
+        autoAlpha: 1,
+        duration: 2.1,
+        repeat: -1,
+        repeatDelay: 2.8,
+        ease: 'power2.inOut',
+      });
     }
 
-    if (card.dataset.hobby === 'guitar') {
-      tl.to(card.querySelector('.guitar-body'), { rotate: -2, transformOrigin: '82px 66px', duration: 0.26, yoyo: true, repeat: 1 }, 0)
-        .to(card.querySelectorAll('.string'), { opacity: 1, strokeWidth: 1.7, duration: 0.12, yoyo: true, repeat: 3, stagger: 0.03 }, 0.04)
-        .to(card.querySelectorAll('.sound-wave'), { opacity: 0.9, scale: 1.08, duration: 0.45, stagger: 0.07 }, 0.1)
-        .to(card.querySelector('.sound-hole'), { scale: 1.08, transformOrigin: '82px 66px', duration: 0.22, yoyo: true, repeat: 1 }, 0.1);
-    }
+    setupRevealAnimations();
+  }, root.value);
+});
 
-    if (card.dataset.hobby === 'doc') {
-      tl.to(card.querySelector('.scan-bar'), { y: 35, opacity: 0.8, duration: 0.75 }, 0)
-        .fromTo(card.querySelectorAll('.doc-line'), { strokeDashoffset: 55 }, { strokeDashoffset: 0, duration: 0.55, stagger: 0.12 }, 0.08)
-        .to(card.querySelector('.doc-check'), { scale: 1.18, duration: 0.25, yoyo: true, repeat: 1, transformOrigin: '50% 50%' }, 0.2);
-    }
-
-    card.addEventListener('mouseenter', () => tl.restart());
-    card.addEventListener('mouseleave', () => {
-      gsap.to(card, { y: 0, duration: 0.35, ease: 'power2.out' });
-      gsap.to(art, { scale: 1, rotate: 0, duration: 0.35, ease: 'power2.out' });
-      gsap.to(orbs, { opacity: 0.35, scale: 1, duration: 0.35 });
-    });
-  });
+onUnmounted(() => {
+  revealObserver?.disconnect();
+  ctx?.revert();
 });
 </script>
 
+<template>
+  <main ref="root" class="portfolio-shell">
+    <div class="page-noise"></div>
+    <nav class="site-nav" aria-label="页面导航">
+      <a class="brand-mark" href="#hero" aria-label="返回首页">YIWU</a>
+      <div class="nav-links">
+        <a v-for="item in navItems" :key="item.href" :href="item.href">{{ item.label }}</a>
+      </div>
+    </nav>
+
+    <section id="hero" class="hero-section">
+      <div class="hero-layout">
+        <div class="hero-content">
+          <p class="hero-kicker">PERSONAL DOSSIER / BLOCKCHAIN ENGINEERING</p>
+          <h1 class="hero-title">易武</h1>
+          <p class="hero-name">YI WU</p>
+          <p class="hero-role">区块链开发者 / 分布式系统实践 / 智能合约工程</p>
+          <p class="hero-copy">专注于将链上逻辑、系统设计与工程实现落到可运行的项目中。</p>
+          <div class="hero-actions" aria-label="主要操作">
+            <a href="#projects" class="primary-action">查看项目</a>
+            <a href="mailto:2489555099@qq.com" class="secondary-action">联系我</a>
+          </div>
+        </div>
+
+        <div class="core-visual" aria-label="纵向金属核心舱视觉">
+          <div class="core-frame">
+            <div class="stabilizer stabilizer-left"></div>
+            <div class="stabilizer stabilizer-right"></div>
+            <div class="core-shell">
+              <div class="core-cap core-cap-top"></div>
+              <div class="core-body">
+                <div class="panel-line panel-line-a"></div>
+                <div class="panel-line panel-line-b"></div>
+                <div class="core-glass">
+                  <span class="scan-blade"></span>
+                  <span class="energy-column"></span>
+                </div>
+                <span class="lock-node node-top"></span>
+                <span class="lock-node node-bottom"></span>
+              </div>
+              <div class="core-cap core-cap-bottom"></div>
+            </div>
+            <div class="signal-rail">
+              <span class="signal-dot"></span>
+            </div>
+            <div class="system-label">CORE CHAMBER / STANDBY RUNNING</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="metric-strip" aria-label="个人参数">
+        <div v-for="metric in heroMetrics" :key="metric.label" class="metric-cell">
+          <span>{{ metric.label }}</span>
+          <strong>{{ metric.value }}</strong>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="content-section project-section">
+      <div class="section-heading reveal">
+        <p class="section-index">02 / SELECTED RECORDS</p>
+        <h2>核心项目经历</h2>
+        <p>围绕分布式系统、智能合约与工程实现展开的代表性项目。</p>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-panel primary-project reveal">
+          <div class="record-head">
+            <span>{{ projects[0].level }}</span>
+            <strong>{{ projects[0].code }}</strong>
+          </div>
+          <div class="project-titleline">
+            <p>{{ projects[0].name }}</p>
+            <h3>{{ projects[0].title }}</h3>
+          </div>
+          <p class="project-summary">{{ projects[0].summary }}</p>
+          <p class="project-detail">{{ projects[0].detail }}</p>
+          <div class="role-row">
+            <span>ROLE</span>
+            <p>{{ projects[0].role }}</p>
+          </div>
+          <ul class="evidence-list">
+            <li v-for="point in projects[0].points" :key="point">{{ point }}</li>
+          </ul>
+          <div class="tech-row">
+            <span v-for="tech in projects[0].tech" :key="tech">{{ tech }}</span>
+          </div>
+        </article>
+
+        <div class="support-projects">
+          <article v-for="project in projects.slice(1)" :key="project.name" class="project-panel support-project reveal">
+            <div class="record-head">
+              <span>{{ project.level }}</span>
+              <strong>{{ project.code }}</strong>
+            </div>
+            <h3>{{ project.name }}</h3>
+            <p class="project-summary">{{ project.summary }}</p>
+            <div class="role-row compact">
+              <span>ROLE</span>
+              <p>{{ project.role }}</p>
+            </div>
+            <ul class="evidence-list compact">
+              <li v-for="point in project.points" :key="point">{{ point }}</li>
+            </ul>
+            <div class="tech-row">
+              <span v-for="tech in project.tech" :key="tech">{{ tech }}</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="content-section skills-section">
+      <div class="section-heading reveal">
+        <p class="section-index">03 / CAPABILITY MAP</p>
+        <h2>技术栈与能力</h2>
+        <p>围绕分布式系统、链上开发与工程实现形成的能力结构。</p>
+      </div>
+
+      <div class="pillar-grid">
+        <article v-for="pillar in capabilityPillars" :key="pillar.title" class="capability-panel reveal">
+          <h3>{{ pillar.title }}</h3>
+          <p>{{ pillar.text }}</p>
+          <div class="keyword-row">
+            <span v-for="keyword in pillar.keywords" :key="keyword">{{ keyword }}</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="skill-matrix reveal">
+        <div v-for="group in skillGroups" :key="group.label" class="skill-group">
+          <span>{{ group.label }}</span>
+          <p>{{ group.items.join(' / ') }}</p>
+        </div>
+      </div>
+      <p class="working-note reveal">具备需求分析、技术方案整理与文档输出能力，能够借助 AI 工具辅助信息处理与开发流程。</p>
+    </section>
+
+    <section id="timeline" class="content-section timeline-section">
+      <div class="section-heading reveal">
+        <p class="section-index">04 / GROWTH TRACE</p>
+        <h2>成长时间线</h2>
+        <p>从专业学习到项目实践，逐步形成面向系统与工程落地的能力方向。</p>
+      </div>
+
+      <div class="timeline-list">
+        <article v-for="item in timeline" :key="item.title" class="timeline-record reveal">
+          <span>{{ item.tag }}</span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.text }}</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="outside" class="content-section outside-section">
+      <div class="section-heading reveal">
+        <p class="section-index">05 / PERSONAL SIDE</p>
+        <h2>工作之外</h2>
+        <p>保持创造力、表达能力与长期学习节奏的个人侧面。</p>
+      </div>
+
+      <div class="outside-grid">
+        <article v-for="item in outsideItems" :key="item.title" class="outside-panel reveal">
+          <span>{{ item.label }}</span>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.text }}</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+      <div class="section-heading reveal">
+        <p class="section-index">06 / CONTACT CHANNEL</p>
+        <h2>联系我</h2>
+        <p>如果你希望进一步了解项目、经历或合作可能，欢迎直接联系。</p>
+      </div>
+
+      <div class="contact-records reveal">
+        <a v-for="item in contacts" :key="item.label" :href="item.href" class="contact-row" :target="item.label === 'GITHUB' ? '_blank' : undefined" rel="noreferrer">
+          <span>{{ item.label }}</span>
+          <strong>{{ item.value }}</strong>
+        </a>
+      </div>
+    </section>
+  </main>
+</template>
+
 <style>
 :root {
-  --bg: #0a0a0a;
-  --bg-card: #111111;
-  --bg-alt: #0d0d0d;
-  --accent: #17f700;
-  --accent-dim: rgba(23, 247, 0, 0.15);
-  --accent-glow: rgba(23, 247, 0, 0.3);
-  --text: #f2f2f2;
-  --text-dim: #999;
-  --border: rgba(255,255,255,.08);
-  --border-accent: rgba(23,247,0,.25);
-  --font-mono: 'JetBrains Mono','Consolas',monospace;
-  --particle-color: 23,247,0;
+  color-scheme: dark;
+  --bg: #151817;
+  --bg-soft: #1c211f;
+  --bg-panel: rgba(37, 43, 40, 0.72);
+  --bg-panel-strong: rgba(48, 55, 52, 0.9);
+  --text: #eef3ef;
+  --muted: #9aa59f;
+  --quiet: #68746f;
+  --line: rgba(219, 232, 222, 0.14);
+  --line-strong: rgba(179, 201, 187, 0.28);
+  --green: #42f06d;
+  --green-soft: rgba(66, 240, 109, 0.18);
+  --green-faint: rgba(66, 240, 109, 0.08);
+  --metal: #9ca6a0;
+  --metal-dark: #353d3a;
+  --shadow: rgba(0, 0, 0, 0.36);
+  --font-sans: "Noto Sans SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, monospace;
 }
 
-/* ============ LIGHT THEME ============ */
-body.light {
-  --bg: #f5f6f8;
-  --bg-card: #ffffff;
-  --bg-alt: #eef0f2;
-  --accent: #0b8a3a;
-  --accent-dim: rgba(11, 138, 58, 0.1);
-  --accent-glow: rgba(11, 138, 58, 0.2);
-  --text: #1a1a2e;
-  --text-dim: #555;
-  --border: rgba(0,0,0,.08);
-  --border-accent: rgba(11,138,58,.25);
-  --particle-color: 11,138,58;
+* {
+  box-sizing: border-box;
 }
 
-/* ============ GLOBAL TRANSITION ============ */
-body, body * { transition: background-color .5s ease, color .5s ease, border-color .5s ease, box-shadow .5s ease; }
-body ::before, body ::after { transition: none; }
+html {
+  scroll-behavior: smooth;
+}
 
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
 body {
-  font-family: 'Noto Sans SC',-apple-system,sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  overflow-x:hidden;
-  line-height:1.8;
-  font-size:17px;
-  cursor:none;
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
 }
 
-/* ============ CURSOR ============ */
-.cursor { position:fixed; width:20px; height:20px; background:var(--accent); border-radius:50%; pointer-events:none; z-index:9999; mix-blend-mode:difference; box-shadow:0 0 12px var(--accent-glow),0 0 30px var(--accent-glow); transition:transform .1s; }
-.cursor-ring { position:fixed; width:50px; height:50px; border:1px solid var(--accent); border-radius:50%; pointer-events:none; z-index:9998; transition:width .3s,height .3s,border-color .3s; }
-.cursor-ring.hover { width:70px; height:70px; border-color:var(--text); }
+a {
+  color: inherit;
+}
 
-/* ============ NOISE OVERLAY ============ */
-.noise { position:fixed; inset:0; pointer-events:none; z-index:9997; opacity:.03; background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-
-/* ============ SCAN LINES ============ */
-.scanlines { position:fixed; inset:0; pointer-events:none; z-index:9996; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.03) 2px,rgba(0,0,0,.03) 4px); }
-
-/* ============ LANDING PAGE ============ */
-.landing {
-  position:fixed; inset:0; z-index:100; background:var(--bg);
-  display:flex; align-items:center; justify-content:center;
-  transition:opacity .8s, visibility .8s;
-}
-.landing.hidden { opacity:0; visibility:hidden; }
-.landing-content { text-align:center; }
-.landing-eyeball {
-  width:120px; height:120px; border-radius:50%;
-  background:radial-gradient(circle at 35% 35%, var(--bg-card), var(--bg));
-  border:3px solid var(--accent);
-  margin:0 auto 40px;
-  position:relative;
-  overflow:hidden;
-  box-shadow:0 0 60px var(--accent-glow);
-  animation:eyePulse 3s ease-in-out infinite;
-}
-@keyframes eyePulse { 0%,100%{box-shadow:0 0 30px var(--accent-glow)} 50%{box-shadow:0 0 80px var(--accent-glow)} }
-.landing-eyeball .pupil {
-  width:36px; height:36px; background:var(--accent); border-radius:50%;
-  position:absolute; top:50%; left:50%;
-  box-shadow:0 0 20px var(--accent), 0 0 60px var(--accent-glow);
-  transition:transform .1s ease-out;
-}
-.landing-eyeball .pupil::after {
-  content:''; width:12px; height:12px; background:var(--bg); border-radius:50%;
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-}
-.landing-title {
-  font-size:clamp(2rem,5vw,3.5rem); font-weight:300; letter-spacing:.3em;
-  color:var(--accent); margin-bottom:12px;
-}
-.landing-subtitle {
-  font-size:1.05rem; color:var(--text-dim); letter-spacing:.2em;
-  margin-bottom:50px;
-}
-.landing-enter {
-  display:inline-block; padding:14px 40px; border:1px solid var(--accent);
-  color:var(--accent); text-decoration:none; font-family:var(--font-mono);
-  font-size:.85rem; letter-spacing:.15em; transition:all .4s;
-  position:relative; overflow:hidden;
-}
-.landing-enter::before {
-  content:''; position:absolute; inset:0; background:var(--accent);
-  transform:scaleX(0); transform-origin:right; transition:transform .4s;
-}
-.landing-enter:hover { color:var(--bg); }
-.landing-enter:hover::before { transform:scaleX(1); transform-origin:left; }
-
-/* ============ NAVIGATION ============ */
-.nav {
-  position:fixed; top:0; width:100%; padding:24px 40px; z-index:90;
-  display:flex; justify-content:space-between; align-items:center;
-  background:linear-gradient(to bottom, var(--bg), transparent);
-  backdrop-filter:blur(10px); border-bottom:1px solid var(--border);
-}
-.nav-logo { font-family:var(--font-mono); font-size:.9rem; color:var(--accent); letter-spacing:.2em; }
-.nav-links { display:flex; gap:36px; list-style:none; align-items:center; }
-.nav-links a { color:var(--text-dim); text-decoration:none; font-size:.85rem; letter-spacing:.1em; transition:color .3s; }
-.nav-links a:hover { color:var(--accent); }
-
-/* ============ THEME SWITCH ============ */
-.theme-switch { display:inline-flex; align-items:center; }
-.theme-switch input { display:none; }
-.theme-slider {
-  width:44px; height:22px; background:var(--text-dim); border-radius:99px;
-  position:relative; cursor:pointer; transition:background .4s;
-}
-.theme-slider .circle {
-  position:absolute; top:-4px; left:-2px; width:30px; height:30px;
-  background:var(--bg-card); border:2px solid var(--accent); border-radius:50%;
-  display:flex; align-items:center; justify-content:center;
-  transition:all .3s cubic-bezier(.4,0,.2,1);
-  box-shadow:0 2px 4px rgba(0,0,0,.2);
-}
-.theme-slider .circle svg { width:16px; height:16px; stroke:var(--accent); fill:none; stroke-width:2; }
-.theme-switch input:checked + .theme-slider { background:var(--accent-dim); }
-.theme-switch input:checked + .theme-slider .circle { left:calc(100% - 28px); }
-.theme-switch input:active + .theme-slider .circle { width:34px; }
-
-/* ============ SECTIONS ============ */
-.section { padding:120px 40px; max-width:1200px; margin:0 auto; position:relative; z-index:2; }
-.section-tag { font-family:var(--font-mono); font-size:.75rem; color:var(--accent); letter-spacing:.3em; margin-bottom:20px; opacity:.7; }
-.section-title { font-size:clamp(1.8rem,3.5vw,2.8rem); font-weight:300; letter-spacing:.1em; margin-bottom:50px; position:relative; }
-
-/* ============ SECTION TITLE HOVER ============ */
-.section-title::before {
-  content:''; position:absolute; left:0; bottom:0; height:2px; width:0;
-  background:var(--accent); transition:width .5s ease;
-}
-.section-title::after {
-  content:''; display:block; width:60px; height:2px; background:var(--accent); margin-top:16px;
-  transition:width .5s ease;
-}
-.section-title:hover::before { width:100%; }
-.section-title:hover::after { width:100%; }
-
-/* ============ CARD HOVER (悬浮卡片效果) ============ */
-.skill-group, .project, .cert-card, .hobby-card, .growth-card {
-  isolation:isolate; position:relative;
-}
-/* 底部 accent 进度条 */
-.skill-group::before, .project::before, .cert-card::before, .hobby-card::before, .growth-card::before {
-  content:''; position:absolute; bottom:0; left:50%; transform:translateX(-50%);
-  height:3px; width:0; background:var(--accent); border-radius:3px 3px 0 0;
-  transition:width .4s ease; z-index:2;
-}
-/* 右上角发光指示点 */
-.skill-group::after, .project::after, .cert-card::after, .hobby-card::after, .growth-card::after {
-  content:''; position:absolute; top:10px; right:14px; width:8px; height:8px;
-  border-radius:50%; background:var(--text-dim); z-index:3;
-  transition:background .3s, box-shadow .3s;
-}
-.skill-group:hover, .project:hover, .cert-card:hover, .hobby-card:hover, .growth-card:hover {
-  border-color:var(--accent); box-shadow:0 8px 30px var(--accent-dim);
-}
-.skill-group:hover::before, .project:hover::before, .cert-card:hover::before,
-.hobby-card:hover::before, .growth-card:hover::before { width:80%; }
-.skill-group:hover::after, .project:hover::after, .cert-card:hover::after,
-.hobby-card:hover::after, .growth-card:hover::after {
-  background:var(--accent); box-shadow:0 0 10px var(--accent-glow); animation:glowPulse 1.2s ease-in-out infinite;
-}
-@keyframes glowPulse { 0%,100%{opacity:.8} 50%{opacity:1} }
-/* hover 文字微调 */
-.skill-group:hover .skill-group-name,
-.project:hover .project-name,
-.cert-card:hover .cert-name,
-.hobby-card:hover .hobby-name,
-.growth-card:hover .growth-title { color:var(--accent); }
-
-/* ============ SECTION DIVIDER ============ */
-.section-divider { max-width:1200px; margin:0 auto; padding:0 40px; position:relative; z-index:2; }
-.section-divider hr { border:none; height:1px; background:linear-gradient(to right, transparent, var(--border), var(--border-accent), var(--border), transparent); }
-
-/* ============ TIMELINE ============ */
-.timeline { position:relative; padding-left:30px; }
-.timeline::before { content:''; position:absolute; left:11px; top:0; bottom:0; width:2px; background:var(--border); }
-.timeline-item { position:relative; padding-bottom:40px; padding-left:16px; }
-.timeline-item:last-child { padding-bottom:0; }
-.timeline-dot { position:absolute; left:-24px; top:4px; width:10px; height:10px; border-radius:50%; border:2px solid var(--accent); background:var(--bg); }
-.timeline-item.active .timeline-dot { background:var(--accent); box-shadow:0 0 12px var(--accent-glow); }
-.timeline-item.upcoming .timeline-dot { border-style:dashed; border-color:var(--text-dim); }
-.timeline-date { font-family:var(--font-mono); font-size:.75rem; color:var(--accent); margin-bottom:4px; }
-.timeline-title { font-size:1rem; font-weight:400; margin-bottom:4px; color:var(--text); }
-.timeline-desc { color:var(--text-dim); font-size:.9rem; }
-.timeline-item.upcoming .timeline-date,
-.timeline-item.upcoming .timeline-title,
-.timeline-item.upcoming .timeline-desc { opacity:.4; }
-
-/* ============ ABOUT SECTION ============ */
-.about-grid { display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:start; }
-.about-text p { color:var(--text-dim); margin-bottom:20px; font-size:1rem; }
-.about-highlights { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
-.highlight-item {
-  background:var(--bg-card); border:1px solid var(--border); padding:18px;
-  transition:border-color .3s;
-}
-.highlight-item:hover { border-color:var(--accent); }
-.highlight-num { font-family:var(--font-mono); font-size:1.8rem; color:var(--accent); }
-.highlight-label { font-size:.8rem; color:var(--text-dim); margin-top:4px; }
-
-/* ============ SKILLS ============ */
-.skills-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:20px; }
-.skill-group { background:var(--bg-card); border:1px solid var(--border); padding:28px; transition:all .4s; position:relative; isolation:isolate; }
-.skill-group:hover { border-color:var(--accent); transform:translateY(-2px); }
-.skill-group-name { font-family:var(--font-mono); font-size:.9rem; color:var(--accent); margin-bottom:16px; letter-spacing:.1em; }
-.skill-tags { display:flex; flex-wrap:wrap; gap:8px; }
-.skill-tag { padding:5px 12px; background:var(--accent-dim); border:1px solid var(--border-accent); font-size:.8rem; color:var(--accent); font-family:var(--font-mono); }
-
-/* ============ PROJECT CARDS ============ */
-.project { background:var(--bg-card); border:1px solid var(--border); margin-bottom:30px; display:grid; grid-template-columns:300px 1fr; overflow:hidden; transition:border-color .4s; position:relative; isolation:isolate; }
-.project:hover { border-color:var(--accent); }
-.project-visual {
-  background:linear-gradient(135deg, var(--bg-card), var(--bg));
-  display:flex; align-items:center; justify-content:center;
-  position:relative; overflow:hidden; min-height:240px;
-}
-.project-visual::after {
-  content:''; position:absolute; inset:0;
-  background:radial-gradient(circle at center, var(--accent-dim), transparent 70%);
-}
-.project-icon { font-family:var(--font-mono); font-size:3rem; color:var(--accent); opacity:.3; z-index:1; }
-.project-body { padding:36px; }
-.project-meta { font-family:var(--font-mono); font-size:.75rem; color:var(--accent); letter-spacing:.1em; margin-bottom:8px; opacity:.7; }
-.project-name { font-size:1.3rem; font-weight:400; margin-bottom:12px; letter-spacing:.05em; }
-.project-desc { color:var(--text-dim); font-size:.95rem; margin-bottom:16px; }
-.project-features { list-style:none; margin-bottom:18px; }
-.project-features li { padding:5px 0; padding-left:18px; position:relative; color:var(--text-dim); font-size:.9rem; }
-.project-features li::before { content:'→'; position:absolute; left:0; color:var(--accent); font-family:var(--font-mono); font-size:.75rem; }
-.project-tech { display:flex; flex-wrap:wrap; gap:6px; }
-.project-tech span { padding:4px 12px; background:rgba(23,247,0,.08); border:1px solid rgba(23,247,0,.15); font-size:.75rem; color:var(--accent); font-family:var(--font-mono); }
-
-/* ============ CERTIFICATES ============ */
-.certs-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:24px; }
-.cert-card { background:var(--bg-card); border:1px solid var(--border); overflow:hidden; transition:all .4s; position:relative; isolation:isolate; }
-.cert-card:hover { border-color:var(--accent); transform:translateY(-3px); }
-.cert-card img { width:100%; height:200px; object-fit:cover; display:block; filter:grayscale(30%); transition:filter .5s; }
-.cert-card:hover img { filter:grayscale(0); }
-.cert-info { padding:20px; }
-.cert-date { font-family:var(--font-mono); font-size:.75rem; color:var(--accent); opacity:.7; }
-.cert-name { font-size:1.05rem; font-weight:400; margin:6px 0; }
-.cert-org { font-size:.85rem; color:var(--text-dim); }
-
-/* ============ HOBBIES ============ */
-.hobbies-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
-.hobby-card {
-  min-height:360px; padding:0; overflow:hidden; text-align:left; position:relative; isolation:isolate;
+.portfolio-shell {
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
   background:
-    radial-gradient(circle at 18% 16%, var(--accent-dim), transparent 26%),
-    linear-gradient(145deg, rgba(255,255,255,.045), transparent 34%),
-    var(--bg-card);
-  border:1px solid var(--border); transition:border-color .35s, box-shadow .35s, transform .35s;
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    radial-gradient(circle at 70% 8%, rgba(66, 240, 109, 0.12), transparent 26%),
+    linear-gradient(135deg, #1b201e 0%, #111412 52%, #202522 100%);
+  background-size: 42px 42px, 42px 42px, auto, auto;
 }
-.hobby-card::before { display:none; }
-.hobby-card::after {
-  content:''; position:absolute; inset:14px; width:auto; height:auto; border-radius:18px;
-  border:1px solid rgba(255,255,255,.05); background:transparent; box-shadow:none; z-index:-1;
+
+.page-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.22;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 3px);
+  mix-blend-mode: soft-light;
 }
-.hobby-card:hover { border-color:var(--border-accent); box-shadow:0 20px 60px rgba(0,0,0,.28), 0 0 34px var(--accent-dim); }
-.hobby-card:hover::after { animation:none; background:transparent; box-shadow:inset 0 0 28px var(--accent-dim); }
-.hobby-orb {
-  position:absolute; width:120px; height:120px; border-radius:50%; opacity:.35; filter:blur(22px);
-  background:radial-gradient(circle, var(--accent-glow), transparent 68%); pointer-events:none;
+
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px clamp(20px, 4vw, 64px);
+  background: linear-gradient(180deg, rgba(21, 24, 23, 0.92), rgba(21, 24, 23, 0));
+  backdrop-filter: blur(12px);
 }
-.hobby-orb.orb-a { top:-38px; right:-34px; }
-.hobby-orb.orb-b { bottom:-46px; left:-38px; transform:scale(.72); }
-.hobby-stage {
-  height:172px; margin:18px 18px 0; border-radius:22px; position:relative; overflow:hidden;
-  display:flex; align-items:center; justify-content:center;
+
+.brand-mark {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  text-decoration: none;
+  color: var(--green);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-links a {
+  font-size: 0.86rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+.hero-section,
+.content-section,
+.contact-section {
+  position: relative;
+  z-index: 2;
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.hero-section {
+  min-height: 100vh;
+  padding: 130px 0 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+  gap: clamp(32px, 6vw, 76px);
+  align-items: center;
+  flex: 1;
+}
+
+.hero-kicker,
+.section-index,
+.metric-cell span,
+.record-head,
+.role-row span,
+.skill-group span,
+.outside-panel span,
+.timeline-record span,
+.contact-row span,
+.system-label,
+.hero-name {
+  font-family: var(--font-mono);
+}
+
+.hero-kicker {
+  margin: 0 0 22px;
+  color: var(--green);
+  font-size: 0.82rem;
+}
+
+.hero-title {
+  margin: 0;
+  font-size: clamp(4rem, 12vw, 8.6rem);
+  line-height: 0.9;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.hero-name {
+  margin: 22px 0 0;
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  color: var(--metal);
+}
+
+.hero-role {
+  margin: 42px 0 0;
+  max-width: 660px;
+  font-size: clamp(1.12rem, 2vw, 1.45rem);
+  color: var(--text);
+}
+
+.hero-copy {
+  max-width: 620px;
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.primary-action,
+.secondary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.92rem;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+
+.primary-action {
+  color: #07110b;
+  border-color: var(--green);
+  background: var(--green);
+}
+
+.secondary-action {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.secondary-action:hover {
+  border-color: var(--green);
+  color: var(--green);
+}
+
+.core-visual {
+  min-height: 560px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.core-frame {
+  position: relative;
+  width: min(420px, 100%);
+  height: 560px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
   background:
-    linear-gradient(135deg, rgba(23,247,0,.09), transparent 35%),
-    repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0 1px, transparent 1px 12px),
-    rgba(255,255,255,.025);
-  border:1px solid rgba(255,255,255,.055);
-}
-.hobby-stage::before {
-  content:''; position:absolute; inset:-40%; opacity:.22;
-  background:conic-gradient(from 110deg, transparent, var(--accent-glow), transparent 35%);
-  animation:hobbyHalo 7s linear infinite;
-}
-.hobby-art { width:78%; max-width:190px; height:138px; position:relative; z-index:1; overflow:visible; }
-.hobby-art * { vector-effect:non-scaling-stroke; }
-.hobby-copy { padding:24px 28px 30px; position:relative; z-index:1; }
-.hobby-kicker { font-family:var(--font-mono); font-size:.68rem; color:var(--text-dim); letter-spacing:.24em; margin-bottom:10px; }
-.hobby-name { font-family:var(--font-mono); font-size:1rem; color:var(--accent); margin-bottom:10px; letter-spacing:.14em; }
-.hobby-desc { color:var(--text-dim); font-size:.92rem; line-height:1.9; }
-.mini-canvas, .guitar-shape, .doc-front-page { fill:rgba(23,247,0,.06); stroke:var(--accent); stroke-width:2.5; }
-.paint-swoosh { fill:none; stroke:url(#paintStroke); stroke-width:7; stroke-linecap:round; stroke-dasharray:190; stroke-dashoffset:60; filter:drop-shadow(0 0 8px var(--accent-glow)); }
-.paint-drop { fill:var(--accent); opacity:.65; transform-box:fill-box; transform-origin:center; animation:paintFloat 3.2s ease-in-out infinite; }
-.drop-two { animation-delay:.35s; } .drop-three { animation-delay:.7s; }
-.brush-handle { stroke:var(--text); stroke-width:7; stroke-linecap:round; opacity:.82; }
-.brush-tip { fill:var(--accent); stroke:var(--accent); stroke-width:2; filter:drop-shadow(0 0 8px var(--accent-glow)); }
-.brush-tool { transform-origin:120px 76px; animation:brushIdle 4s ease-in-out infinite; }
-.sound-wave { fill:none; stroke:var(--accent); stroke-width:2; opacity:.35; stroke-linecap:round; transform-origin:80px 60px; animation:soundBreath 2.4s ease-in-out infinite; }
-.wave-two { animation-delay:.3s; }
-.guitar-shape { filter:drop-shadow(0 0 12px var(--accent-glow)); }
-.sound-hole { fill:var(--bg); stroke:var(--accent); stroke-width:2; }
-.guitar-bridge { fill:none; stroke:var(--accent); stroke-width:3; stroke-linecap:round; opacity:.9; }
-.guitar-neck { fill:rgba(23,247,0,.12); stroke:var(--accent); stroke-width:1.5; }
-.guitar-head { fill:none; stroke:var(--accent); stroke-width:4; stroke-linecap:round; }
-.tuner { fill:var(--accent); opacity:.95; }
-.fret { stroke:rgba(255,255,255,.55); stroke-width:1; opacity:.8; }
-.string { fill:none; stroke:rgba(255,255,255,.85); stroke-width:1.15; opacity:.78; transform-box:fill-box; transform-origin:center; stroke-dasharray:82; animation:stringPulse 2.1s ease-in-out infinite; }
-.string-two { animation-delay:.08s; } .string-three { animation-delay:.16s; }
-.string-four { animation-delay:.24s; } .string-five { animation-delay:.32s; } .string-six { animation-delay:.4s; }
-.doc-shadow-page, .doc-back-page { fill:rgba(255,255,255,.035); stroke:rgba(255,255,255,.14); stroke-width:1.4; }
-.doc-front-page { filter:drop-shadow(0 0 12px var(--accent-glow)); }
-.doc-corner, .doc-line, .doc-check { fill:none; stroke:var(--accent); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
-.doc-line { stroke:var(--text); opacity:.72; stroke-dasharray:55; animation:docLine 3s ease-in-out infinite; }
-.line-two { animation-delay:.18s; } .line-three { animation-delay:.36s; }
-.doc-check { filter:drop-shadow(0 0 8px var(--accent-glow)); }
-.scan-bar { fill:var(--accent); opacity:.16; filter:blur(.2px); animation:scanDoc 2.8s ease-in-out infinite; }
-@keyframes hobbyHalo { to { transform:rotate(1turn); } }
-@keyframes paintFloat { 50% { transform:translateY(-5px) scale(1.18); opacity:1; } }
-@keyframes brushIdle { 50% { transform:translate(4px,-5px) rotate(5deg); } }
-@keyframes soundBreath { 50% { transform:scale(1.08); opacity:.9; } }
-@keyframes stringPulse { 50% { opacity:1; stroke-width:1.45; } }
-@keyframes docLine { 50% { opacity:1; stroke-dashoffset:-10; } }
-@keyframes scanDoc { 0%,100% { transform:translateY(-2px); opacity:.05; } 50% { transform:translateY(34px); opacity:.42; } }
-@media (max-width:980px) {
-  .hobbies-grid { grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+    linear-gradient(90deg, rgba(255,255,255,0.04), transparent 18%, transparent 82%, rgba(255,255,255,0.035)),
+    linear-gradient(180deg, rgba(66, 240, 109, 0.08), rgba(255,255,255,0.025) 36%, rgba(66, 240, 109, 0.05));
+  box-shadow: 0 28px 80px var(--shadow), inset 0 0 70px rgba(255,255,255,0.035);
 }
 
-/* ============ CONTACT ============ */
-.contact-links { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; }
-.contact-link {
-  display:inline-flex; align-items:center; gap:10px;
-  padding:16px 32px; background:var(--bg-card); border:1px solid var(--border);
-  color:var(--text); text-decoration:none; font-size:.9rem; transition:all .3s;
-}
-.contact-link:hover { border-color:var(--accent); color:var(--accent); }
-.contact-link svg { width:18px; height:18px; stroke:currentColor; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
-
-/* ============ GLITCH TEXT ============ */
-.glitch { position:relative; }
-.glitch::before,.glitch::after {
-  content:attr(data-text); position:absolute; top:0; left:0; width:100%; height:100%;
-}
-.glitch::before { color:var(--accent); animation:glitch1 2s infinite linear alternate-reverse; z-index:-1; }
-.glitch::after { color:var(--accent); animation:glitch2 3s infinite linear alternate-reverse; z-index:-2; opacity:.5; }
-@keyframes glitch1 {
-  0%,100%{clip-path:inset(80% 0 10% 0);transform:translate(-2px)}
-  20%{clip-path:inset(20% 0 60% 0);transform:translate(2px)}
-  40%{clip-path:inset(50% 0 30% 0);transform:translate(-1px)}
-  60%{clip-path:inset(10% 0 80% 0);transform:translate(1px)}
-  80%{clip-path:inset(70% 0 5% 0);transform:translate(-2px)}
-}
-@keyframes glitch2 {
-  0%,100%{clip-path:inset(10% 0 70% 0);transform:translate(2px)}
-  20%{clip-path:inset(60% 0 20% 0);transform:translate(-2px)}
-  40%{clip-path:inset(30% 0 50% 0);transform:translate(1px)}
-  60%{clip-path:inset(80% 0 5% 0);transform:translate(-1px)}
-  80%{clip-path:inset(5% 0 85% 0);transform:translate(2px)}
+.core-frame::before,
+.core-frame::after {
+  content: '';
+  position: absolute;
+  left: 32px;
+  right: 32px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
 }
 
-/* ============ FOOTER ============ */
-.footer { padding:40px; text-align:center; border-top:1px solid var(--border); color:var(--text-dim); font-size:.8rem; }
-.footer span { color:var(--accent); font-family:var(--font-mono); }
-
-/* ============ SCROLL FADE (GSAP driven) ============ */
-.fade-up { opacity:0; transform:translateY(30px); }
-
-/* ============ RESPONSIVE ============ */
-@media (max-width:768px) {
-  .nav { padding:16px 20px; }
-  .nav-links { display:none; }
-  .section { padding:80px 20px; }
-  .about-grid,.project { grid-template-columns:1fr; }
-  .project-visual { min-height:160px; }
-  .contact-links { flex-direction:column; align-items:center; }
-  .hobbies-grid { grid-template-columns:1fr; }
-  .hobby-card { min-height:330px; }
-  .hobby-stage { height:150px; }
+.core-frame::before {
+  top: 76px;
 }
 
-.growth-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:20px; }
-    .growth-card { background:var(--bg-card); border:1px solid var(--border); padding:24px; transition:all .4s; display:flex; gap:14px; align-items:flex-start; position:relative; isolation:isolate; }
-    .growth-card:hover { border-color:var(--accent); }
-    .growth-status { width:10px; height:10px; border-radius:50%; margin-top:6px; flex-shrink:0; background:var(--text-dim); }
-    .growth-card.growth-done .growth-status { background:var(--accent); box-shadow:0 0 8px var(--accent-glow); }
-    .growth-card.growth-now .growth-status { background:var(--accent); animation:statusPulse 1.5s ease-in-out infinite; }
-    @keyframes statusPulse { 0%,100%{box-shadow:0 0 4px var(--accent-glow)} 50%{box-shadow:0 0 16px var(--accent-glow)} }
-    .growth-body { flex:1; }
-    .growth-label { font-family:var(--font-mono); font-size:.75rem; color:var(--accent); margin-bottom:4px; opacity:.7; }
-    .growth-title { font-size:1rem; font-weight:400; margin-bottom:4px; color:var(--text); }
-    .growth-detail { color:var(--text-dim); font-size:.85rem; }
+.core-frame::after {
+  bottom: 76px;
+}
+
+.core-shell {
+  position: absolute;
+  inset: 70px 126px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  filter: drop-shadow(0 28px 42px rgba(0,0,0,0.45));
+}
+
+.core-cap {
+  height: 62px;
+  border: 1px solid var(--line-strong);
+  background:
+    linear-gradient(115deg, #65716b, #2c3430 42%, #a8b2ab 58%, #3a433f);
+  box-shadow: inset 0 0 24px rgba(255,255,255,0.08);
+}
+
+.core-cap-top {
+  border-radius: 8px 8px 3px 3px;
+}
+
+.core-cap-bottom {
+  border-radius: 3px 3px 8px 8px;
+}
+
+.core-body {
+  position: relative;
+  flex: 1;
+  border-left: 1px solid var(--line-strong);
+  border-right: 1px solid var(--line-strong);
+  background:
+    linear-gradient(90deg, #2b3330, #4a5550 18%, #1c2420 48%, #68736d 52%, #2a3330 76%, #111714);
+  overflow: hidden;
+}
+
+.core-glass {
+  --core-glow: 0.42;
+  position: absolute;
+  inset: 34px 28px;
+  border: 1px solid rgba(66, 240, 109, 0.55);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(66, 240, 109, calc(var(--core-glow) * 0.22)), rgba(66, 240, 109, 0.035)),
+    rgba(8, 20, 12, 0.48);
+  overflow: hidden;
+  box-shadow:
+    0 0 calc(var(--core-glow) * 28px) rgba(66, 240, 109, 0.38),
+    inset 0 0 34px rgba(66, 240, 109, 0.14);
+}
+
+.energy-column {
+  position: absolute;
+  top: 18px;
+  bottom: 18px;
+  left: 50%;
+  width: 12px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, transparent, rgba(66,240,109,0.82), transparent);
+  box-shadow: 0 0 28px rgba(66,240,109,0.45);
+}
+
+.scan-blade {
+  position: absolute;
+  top: -30%;
+  left: 0;
+  right: 0;
+  height: 34%;
+  opacity: 0;
+  background: linear-gradient(180deg, transparent, rgba(66,240,109,0.35), transparent);
+}
+
+.panel-line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(255,255,255,0.14);
+}
+
+.panel-line-a {
+  left: 22%;
+}
+
+.panel-line-b {
+  right: 22%;
+}
+
+.lock-node {
+  position: absolute;
+  left: 50%;
+  width: 40px;
+  height: 10px;
+  border: 1px solid var(--line-strong);
+  background: var(--metal-dark);
+  transform: translateX(-50%);
+}
+
+.node-top {
+  top: 14px;
+}
+
+.node-bottom {
+  bottom: 14px;
+}
+
+.stabilizer {
+  position: absolute;
+  top: 180px;
+  width: 78px;
+  height: 190px;
+  border: 1px solid var(--line-strong);
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.01));
+}
+
+.stabilizer-left {
+  left: 64px;
+  border-right: 0;
+}
+
+.stabilizer-right {
+  right: 64px;
+  border-left: 0;
+}
+
+.signal-rail {
+  position: absolute;
+  left: 72px;
+  right: 72px;
+  bottom: 48px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green-soft), transparent);
+}
+
+.signal-dot {
+  position: absolute;
+  left: 0;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  opacity: 0;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 16px rgba(66,240,109,0.7);
+}
+
+.system-label {
+  position: absolute;
+  left: 28px;
+  bottom: 18px;
+  font-size: 0.68rem;
+  color: var(--quiet);
+}
+
+.metric-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.025);
+}
+
+.metric-cell {
+  min-height: 82px;
+  padding: 18px 20px;
+  border-right: 1px solid var(--line);
+}
+
+.metric-cell:last-child {
+  border-right: 0;
+}
+
+.metric-cell span {
+  display: block;
+  color: var(--quiet);
+  font-size: 0.72rem;
+  margin-bottom: 9px;
+}
+
+.metric-cell strong {
+  display: block;
+  color: var(--text);
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  font-weight: 500;
+}
+
+.content-section,
+.contact-section {
+  padding: 112px 0;
+}
+
+.section-heading {
+  max-width: 760px;
+  margin-bottom: 44px;
+}
+
+.section-index {
+  margin: 0 0 14px;
+  color: var(--green);
+  font-size: 0.78rem;
+}
+
+.section-heading h2 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 4rem);
+  line-height: 1.08;
+  font-weight: 700;
+}
+
+.section-heading p:last-child {
+  margin: 18px 0 0;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+.project-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  gap: 22px;
+}
+
+.support-projects {
+  display: grid;
+  gap: 22px;
+}
+
+.project-panel,
+.capability-panel,
+.timeline-record,
+.outside-panel {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg-panel);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.22);
+  transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+
+.project-panel:hover,
+.capability-panel:hover,
+.timeline-record:hover,
+.outside-panel:hover {
+  border-color: rgba(66,240,109,0.42);
+  transform: translateY(-3px);
+  background: var(--bg-panel-strong);
+}
+
+.project-panel {
+  padding: clamp(24px, 4vw, 38px);
+}
+
+.primary-project {
+  min-height: 100%;
+  background:
+    linear-gradient(135deg, rgba(66,240,109,0.1), transparent 36%),
+    var(--bg-panel);
+}
+
+.record-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+  color: var(--quiet);
+  font-size: 0.74rem;
+}
+
+.record-head strong {
+  color: var(--green);
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.project-titleline p {
+  margin: 0 0 8px;
+  color: var(--green);
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+}
+
+.project-panel h3,
+.capability-panel h3,
+.timeline-record h3,
+.outside-panel h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+.project-summary,
+.project-detail {
+  margin: 18px 0 0;
+  color: var(--muted);
+  line-height: 1.85;
+}
+
+.project-detail {
+  color: var(--text);
+}
+
+.role-row {
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  gap: 18px;
+  margin-top: 26px;
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.role-row.compact {
+  grid-template-columns: 58px 1fr;
+  margin-top: 18px;
+  padding: 12px 0;
+}
+
+.role-row span {
+  color: var(--green);
+  font-size: 0.72rem;
+}
+
+.role-row p {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.7;
+}
+
+.evidence-list {
+  list-style: none;
+  margin: 24px 0 0;
+  padding: 0;
+  display: grid;
+  gap: 14px;
+}
+
+.evidence-list.compact {
+  gap: 10px;
+}
+
+.evidence-list li {
+  position: relative;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.evidence-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.76em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 12px rgba(66,240,109,0.55);
+}
+
+.tech-row,
+.keyword-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.tech-row span,
+.keyword-row span {
+  padding: 7px 10px;
+  border: 1px solid rgba(66,240,109,0.22);
+  border-radius: 6px;
+  color: var(--green);
+  background: var(--green-faint);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+}
+
+.pillar-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.capability-panel {
+  padding: 28px;
+}
+
+.capability-panel p {
+  margin: 16px 0 0;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.skill-matrix {
+  margin-top: 26px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.025);
+}
+
+.skill-group {
+  padding: 20px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.skill-group:nth-child(2n) {
+  border-right: 0;
+}
+
+.skill-group:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+
+.skill-group span {
+  color: var(--green);
+  font-size: 0.78rem;
+}
+
+.skill-group p {
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.working-note {
+  margin: 24px 0 0;
+  padding: 22px 24px;
+  border-left: 3px solid var(--green);
+  color: var(--text);
+  background: rgba(66,240,109,0.06);
+  line-height: 1.85;
+}
+
+.timeline-list {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  max-width: 900px;
+}
+
+.timeline-list::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 11px;
+  width: 1px;
+  background: linear-gradient(180deg, var(--green), var(--line), transparent);
+}
+
+.timeline-record {
+  position: relative;
+  margin-left: 42px;
+  padding: 24px 28px;
+}
+
+.timeline-record::before {
+  content: '';
+  position: absolute;
+  left: -37px;
+  top: 30px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 16px rgba(66,240,109,0.55);
+}
+
+.timeline-record span,
+.outside-panel span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--green);
+  font-size: 0.74rem;
+}
+
+.timeline-record p,
+.outside-panel p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  line-height: 1.85;
+}
+
+.outside-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.outside-panel {
+  padding: 28px;
+  min-height: 240px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.04), transparent),
+    var(--bg-panel);
+}
+
+.contact-section {
+  padding-bottom: 90px;
+}
+
+.contact-records {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: rgba(255,255,255,0.025);
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 20px;
+  padding: 22px 24px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.contact-row:last-child {
+  border-bottom: 0;
+}
+
+.contact-row span {
+  color: var(--green);
+  font-size: 0.78rem;
+}
+
+.contact-row strong {
+  color: var(--text);
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.contact-row:hover {
+  background: var(--green-faint);
+}
+
+@media (max-width: 960px) {
+  .nav-links {
+    display: none;
+  }
+
+  .hero-layout,
+  .project-grid,
+  .pillar-grid,
+  .outside-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-section {
+    padding-top: 104px;
+  }
+
+  .core-visual {
+    min-height: 460px;
+  }
+
+  .core-frame {
+    height: 460px;
+  }
+
+  .core-shell {
+    inset: 54px 34%;
+  }
+
+  .stabilizer-left {
+    left: 18%;
+  }
+
+  .stabilizer-right {
+    right: 18%;
+  }
+
+  .metric-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin-top: 34px;
+  }
+
+  .metric-cell:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .metric-cell:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 640px) {
+  .hero-section,
+  .content-section,
+  .contact-section {
+    width: min(100% - 28px, 1180px);
+  }
+
+  .site-nav {
+    padding: 18px 16px;
+  }
+
+  .hero-title {
+    font-size: clamp(3.6rem, 23vw, 5.6rem);
+  }
+
+  .hero-role {
+    margin-top: 30px;
+  }
+
+  .core-visual {
+    min-height: 380px;
+  }
+
+  .core-frame {
+    height: 380px;
+  }
+
+  .core-shell {
+    inset: 46px 31%;
+  }
+
+  .core-cap {
+    height: 48px;
+  }
+
+  .stabilizer {
+    top: 132px;
+    height: 132px;
+    width: 54px;
+  }
+
+  .signal-rail {
+    left: 44px;
+    right: 44px;
+  }
+
+  .metric-strip,
+  .skill-matrix {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-cell,
+  .skill-group {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .metric-cell:last-child,
+  .skill-group:last-child {
+    border-bottom: 0;
+  }
+
+  .project-panel,
+  .capability-panel,
+  .timeline-record,
+  .outside-panel {
+    padding: 22px;
+  }
+
+  .role-row,
+  .role-row.compact,
+  .contact-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
 </style>
