@@ -11,7 +11,7 @@ const navItems = [
   { label: '项目', href: '#projects' },
   { label: '能力', href: '#skills' },
   { label: '时间线', href: '#timeline' },
-  { label: '证书', href: '#certificates' },
+  { label: '荣誉', href: '#certificates' },
   { label: '工作之外', href: '#outside' },
   { label: '联系', href: '#contact' },
 ];
@@ -20,7 +20,7 @@ const heroMetrics = [
   { label: 'PROJECTS', value: '03' },
   { label: 'RANK', value: 'TOP 5%' },
   { label: 'FOCUS', value: 'RAFT · SOLIDITY · VUE' },
-  { label: 'LOCATION', value: 'CHONGQING' },
+  { label: 'MAJOR', value: '区块链工程' },
 ];
 
 const projects = [
@@ -117,22 +117,19 @@ const timeline = [
 
 const certificates = [
   {
-    title: '重庆市区块链创新大赛 · 一等奖',
-    meta: '重庆市教育委员会 / 本科组 / 第四届',
+    title: '区块链技术应用创新大赛 · 一等奖',
+    meta: '本科组 / 第四届',
     date: '2025.12',
-    image: '/assets/cert-blockchain.jpg',
   },
   {
     title: '全国大学生数学竞赛 · 三等奖',
     meta: '中国数学会 / 非数学 A 类 / 第十七届',
     date: '2025.12',
-    image: '/assets/cert-math.jpg',
   },
   {
     title: '挑战杯校赛 · 三等奖',
-    meta: '重庆工程学院 / 第十五届 / 红盾维安',
+    meta: '第十五届 / 红盾维安',
     date: '2026.03',
-    image: '/assets/cert-challenge.jpg',
   },
 ];
 
@@ -414,13 +411,12 @@ onUnmounted(() => {
     <section id="certificates" class="content-section certificates-section">
       <div class="section-heading reveal">
         <p class="section-index">05 / HONORS & CERTIFICATES</p>
-        <h2>荣誉与证书</h2>
-        <p>把竞赛结果作为可验证的补充证据，让项目能力与学习表现彼此支撑。</p>
+        <h2>荣誉记录</h2>
+        <p>暂时隐藏奖状图片，仅保留可快速扫读的文字记录。</p>
       </div>
 
       <div class="certificate-grid">
         <article v-for="cert in certificates" :key="cert.title" class="certificate-card reveal">
-          <img :src="cert.image" :alt="cert.title">
           <div class="certificate-info">
             <span>{{ cert.date }}</span>
             <h3>{{ cert.title }}</h3>
@@ -1207,12 +1203,27 @@ a {
 }
 
 .certificate-card {
+  position: relative;
   overflow: hidden;
+  min-height: 210px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: var(--bg-panel);
+  background:
+    linear-gradient(135deg, rgba(66,240,109,0.08), transparent 48%),
+    var(--bg-panel);
   box-shadow: 0 18px 60px rgba(0,0,0,0.22);
   transition: border-color 0.25s ease, transform 0.25s ease, background 0.25s ease;
+}
+
+.certificate-card::after {
+  content: '';
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 18px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--green), transparent);
+  opacity: 0.45;
 }
 
 .certificate-card:hover {
@@ -1221,23 +1232,10 @@ a {
   background: var(--bg-panel-strong);
 }
 
-.certificate-card img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  border-bottom: 1px solid var(--line);
-  filter: saturate(0.72) contrast(1.05);
-  transition: filter 0.25s ease, transform 0.25s ease;
-}
-
-.certificate-card:hover img {
-  filter: saturate(1) contrast(1.04);
-  transform: scale(1.015);
-}
-
 .certificate-info {
-  padding: 20px;
+  position: relative;
+  z-index: 1;
+  padding: 28px;
 }
 
 .certificate-info span {

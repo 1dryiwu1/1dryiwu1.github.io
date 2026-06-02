@@ -269,7 +269,7 @@ Bottom system strip:
 - `PROJECTS // 03`
 - `RANK // TOP 5%`
 - `FOCUS // RAFT · SOLIDITY · VUE`
-- `LOCATION // CHONGQING`
+     - `MAJOR // 区块链工程`
 
 ### 7.4 Hero visual
 
