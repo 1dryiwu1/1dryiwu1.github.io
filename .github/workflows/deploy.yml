@@ -33,9 +33,6 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Use app build as site index
-        run: cp dist/app.html dist/index.html
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
