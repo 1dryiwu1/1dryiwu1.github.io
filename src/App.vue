@@ -1,10 +1,12 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue';
+import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue';
 import { gsap } from 'gsap';
 
 const root = ref(null);
 const networkCanvas = ref(null);
 const introActive = ref(true);
+const activeProjectIndex = ref(0);
+const activeCapabilityIndex = ref(0);
 let ctx;
 let revealObserver;
 let animationFrame;
@@ -135,9 +137,36 @@ const contacts = [
   { label: 'GITHUB', value: 'github.com/1dryiwu1', href: 'https://github.com/1dryiwu1' },
 ];
 
+const activeProject = computed(() => projects[activeProjectIndex.value]);
+const activeCapability = computed(() => capabilityPillars[activeCapabilityIndex.value]);
+
 function closeIntro() {
   introTimeline?.progress(1);
   introActive.value = false;
+}
+
+function animatePanel(selector) {
+  nextTick(() => {
+    const target = root.value?.querySelector(selector);
+    if (!target) return;
+    gsap.fromTo(
+      target,
+      { autoAlpha: 0, y: 14, filter: 'blur(6px)' },
+      { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.42, ease: 'power3.out' },
+    );
+  });
+}
+
+function selectProject(index) {
+  if (activeProjectIndex.value === index) return;
+  activeProjectIndex.value = index;
+  animatePanel('.project-focus');
+}
+
+function selectCapability(index) {
+  if (activeCapabilityIndex.value === index) return;
+  activeCapabilityIndex.value = index;
+  animatePanel('.capability-focus');
 }
 
 function setupNetworkCanvas() {
@@ -270,6 +299,16 @@ onMounted(() => {
       introTimeline
         .set('.site-nav, .hero-kicker, .hero-title, .hero-copy, .hero-actions, .stat-card, .chain-card, .network-console', { autoAlpha: 0 })
         .from('.intro-gridline', { scaleX: 0, transformOrigin: 'left center', duration: 0.7, stagger: 0.08 })
+        .from('.intro-access-frame', { clipPath: 'inset(48% 0 48% 0)', autoAlpha: 0, duration: 0.72, ease: 'power3.inOut' }, '-=0.35')
+        .from('.intro-corner', { scale: 0, autoAlpha: 0, duration: 0.28, stagger: 0.04 }, '-=0.45')
+        .from('.intro-orbit span', { scale: 0.78, autoAlpha: 0, duration: 0.5, stagger: 0.08 }, '-=0.35')
+        .from('.intro-readout li', { x: -18, autoAlpha: 0, duration: 0.38, stagger: 0.08 }, '-=0.28')
+        .from('.intro-biometric span, .intro-dna span, .intro-number-cloud span', {
+          autoAlpha: 0,
+          y: 10,
+          duration: 0.34,
+          stagger: { each: 0.025, from: 'random' },
+        }, '-=0.32')
         .from('.intro-node', { scale: 0, autoAlpha: 0, duration: 0.36, stagger: { each: 0.06, from: 'center' } }, '-=0.2')
         .from('.intro-title-line', { yPercent: 105, autoAlpha: 0, duration: 0.72, stagger: 0.08 }, '-=0.08')
         .from('.intro-copy, .intro-status', { autoAlpha: 0, y: 14, duration: 0.5, stagger: 0.08 }, '-=0.3')
@@ -319,6 +358,32 @@ onMounted(() => {
         yoyo: true,
         ease: 'sine.inOut',
       });
+
+      gsap.to('.intro-orbit', {
+        rotate: 360,
+        duration: 18,
+        repeat: -1,
+        ease: 'none',
+      });
+
+      gsap.to('.intro-biometric span', {
+        scaleX: () => gsap.utils.random(0.35, 1),
+        duration: 0.72,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        stagger: 0.05,
+      });
+
+      gsap.to('.intro-number-cloud span', {
+        y: (index) => (index % 2 === 0 ? -8 : 8),
+        autoAlpha: 0.42,
+        duration: 1.7,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        stagger: 0.12,
+      });
     }
 
     setupRevealAnimations();
@@ -344,6 +409,43 @@ onUnmounted(() => {
           <span class="intro-gridline"></span>
           <span class="intro-gridline"></span>
           <span class="intro-gridline"></span>
+        </div>
+        <div class="intro-access-frame" aria-hidden="true">
+          <span class="intro-corner c1"></span>
+          <span class="intro-corner c2"></span>
+          <span class="intro-corner c3"></span>
+          <span class="intro-corner c4"></span>
+          <div class="intro-orbit">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="intro-biometric">
+            <span v-for="index in 12" :key="index"></span>
+          </div>
+          <div class="intro-geo-trace">
+            <span class="trace-node a"></span>
+            <span class="trace-node b"></span>
+            <span class="trace-node c"></span>
+            <span class="trace-path p1"></span>
+            <span class="trace-path p2"></span>
+          </div>
+        </div>
+        <ul class="intro-readout" aria-hidden="true">
+          <li><span>ACCESS</span><strong>REQUEST ACCEPTED</strong></li>
+          <li><span>ID</span><strong>CONFIRMED</strong></li>
+          <li><span>CHAIN</span><strong>GENESIS VERIFIED</strong></li>
+        </ul>
+        <div class="intro-number-cloud" aria-hidden="true">
+          <span>0924</span>
+          <span>17E8</span>
+          <span>RAFT</span>
+          <span>0x42</span>
+          <span>SYNC</span>
+          <span>2026</span>
+        </div>
+        <div class="intro-dna" aria-hidden="true">
+          <span v-for="index in 8" :key="index"></span>
         </div>
         <div class="intro-constellation" aria-hidden="true">
           <span class="intro-node n1"></span>
@@ -440,25 +542,62 @@ onUnmounted(() => {
         <p>用项目证明能力，而不是只堆技术名词。重点展示分布式系统、智能合约和工程表达三个方向。</p>
       </div>
 
-      <div class="project-grid">
-        <article v-for="project in projects" :key="project.code" class="project-card reveal" :class="{ featured: project.code === '01' }">
+      <div class="project-workbench reveal">
+        <div class="project-tabs" role="tablist" aria-label="项目切换">
+          <button
+            v-for="(project, index) in projects"
+            :id="`project-tab-${project.code}`"
+            :key="project.code"
+            class="switch-tab"
+            :class="{ active: activeProjectIndex === index }"
+            type="button"
+            role="tab"
+            :aria-selected="activeProjectIndex === index"
+            :aria-controls="`project-panel-${project.code}`"
+            @click="selectProject(index)"
+          >
+            <span>{{ project.code }}</span>
+            <strong>{{ project.label }}</strong>
+          </button>
+        </div>
+
+        <article
+          :id="`project-panel-${activeProject.code}`"
+          class="project-focus"
+          role="tabpanel"
+          :aria-labelledby="`project-tab-${activeProject.code}`"
+        >
           <div class="record-head">
-            <span>{{ project.label }}</span>
-            <strong>{{ project.code }}</strong>
+            <span>{{ activeProject.label }}</span>
+            <strong>{{ activeProject.code }}</strong>
           </div>
-          <h3>{{ project.title }}</h3>
-          <p class="project-summary">{{ project.summary }}</p>
+          <h3>{{ activeProject.title }}</h3>
+          <p class="project-summary">{{ activeProject.summary }}</p>
           <div class="role-row">
             <span>ROLE</span>
-            <p>{{ project.role }}</p>
+            <p>{{ activeProject.role }}</p>
           </div>
           <ul class="evidence-list">
-            <li v-for="point in project.points" :key="point">{{ point }}</li>
+            <li v-for="point in activeProject.points" :key="point">{{ point }}</li>
           </ul>
           <div class="tech-row">
-            <span v-for="tech in project.tech" :key="tech">{{ tech }}</span>
+            <span v-for="tech in activeProject.tech" :key="tech">{{ tech }}</span>
           </div>
         </article>
+
+        <div class="project-side">
+          <button
+            v-for="(project, index) in projects"
+            :key="project.title"
+            class="project-mini"
+            :class="{ active: activeProjectIndex === index }"
+            type="button"
+            @click="selectProject(index)"
+          >
+            <span>{{ project.code }} / {{ project.label }}</span>
+            <strong>{{ project.title }}</strong>
+          </button>
+        </div>
       </div>
     </section>
 
@@ -469,20 +608,44 @@ onUnmounted(() => {
         <p>能力中心不是散乱的工具列表，而是围绕可信系统构建的一组可复用工程能力。</p>
       </div>
 
-      <div class="pillar-grid">
-        <article v-for="pillar in capabilityPillars" :key="pillar.title" class="capability-card reveal">
-          <h3>{{ pillar.title }}</h3>
-          <p>{{ pillar.text }}</p>
+      <div class="capability-console reveal">
+        <div class="capability-tabs" role="tablist" aria-label="能力方向切换">
+          <button
+            v-for="(pillar, index) in capabilityPillars"
+            :id="`capability-tab-${index}`"
+            :key="pillar.title"
+            class="switch-tab"
+            :class="{ active: activeCapabilityIndex === index }"
+            type="button"
+            role="tab"
+            :aria-selected="activeCapabilityIndex === index"
+            :aria-controls="`capability-panel-${index}`"
+            @click="selectCapability(index)"
+          >
+            <span>0{{ index + 1 }}</span>
+            <strong>{{ pillar.title }}</strong>
+          </button>
+        </div>
+
+        <article
+          :id="`capability-panel-${activeCapabilityIndex}`"
+          class="capability-focus"
+          role="tabpanel"
+          :aria-labelledby="`capability-tab-${activeCapabilityIndex}`"
+        >
+          <span class="capability-label">ACTIVE CAPABILITY</span>
+          <h3>{{ activeCapability.title }}</h3>
+          <p>{{ activeCapability.text }}</p>
           <div class="keyword-row">
-            <span v-for="keyword in pillar.keywords" :key="keyword">{{ keyword }}</span>
+            <span v-for="keyword in activeCapability.keywords" :key="keyword">{{ keyword }}</span>
           </div>
         </article>
-      </div>
 
-      <div class="skill-matrix reveal">
-        <div v-for="group in skillGroups" :key="group.label" class="skill-group">
-          <span>{{ group.label }}</span>
-          <p>{{ group.items }}</p>
+        <div class="skill-matrix">
+          <div v-for="group in skillGroups" :key="group.label" class="skill-group">
+            <span>{{ group.label }}</span>
+            <p>{{ group.items }}</p>
+          </div>
         </div>
       </div>
     </section>
@@ -678,6 +841,288 @@ a {
 .intro-gridline:nth-child(3) { top: 64%; }
 .intro-gridline:nth-child(4) { top: 82%; }
 
+.intro-access-frame {
+  position: absolute;
+  width: min(720px, 84vw);
+  aspect-ratio: 1.45;
+  border: 1px solid rgba(210, 235, 218, 0.16);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, transparent 49.7%, rgba(86, 242, 151, 0.16) 50%, transparent 50.3%),
+    linear-gradient(0deg, transparent 49.7%, rgba(114, 199, 255, 0.12) 50%, transparent 50.3%),
+    linear-gradient(135deg, rgba(86, 242, 151, 0.06), transparent 36%, rgba(255, 196, 119, 0.035));
+  box-shadow:
+    inset 0 0 48px rgba(86, 242, 151, 0.055),
+    0 0 80px rgba(86, 242, 151, 0.06);
+  pointer-events: none;
+  will-change: clip-path, opacity;
+}
+
+.intro-access-frame::before,
+.intro-access-frame::after {
+  content: '';
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(86,242,151,0.55), rgba(114,199,255,0.3), transparent);
+  filter: drop-shadow(0 0 12px rgba(86,242,151,0.45));
+}
+
+.intro-access-frame::before {
+  top: 22%;
+}
+
+.intro-access-frame::after {
+  bottom: 24%;
+}
+
+.intro-corner {
+  position: absolute;
+  width: 54px;
+  height: 54px;
+  border-color: rgba(86, 242, 151, 0.72);
+  filter: drop-shadow(0 0 12px rgba(86,242,151,0.32));
+}
+
+.intro-corner.c1 {
+  left: -1px;
+  top: -1px;
+  border-left: 2px solid;
+  border-top: 2px solid;
+}
+
+.intro-corner.c2 {
+  right: -1px;
+  top: -1px;
+  border-right: 2px solid;
+  border-top: 2px solid;
+}
+
+.intro-corner.c3 {
+  left: -1px;
+  bottom: -1px;
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+}
+
+.intro-corner.c4 {
+  right: -1px;
+  bottom: -1px;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+}
+
+.intro-orbit {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(300px, 52vw);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  transform-origin: 0 0;
+  opacity: 0.82;
+}
+
+.intro-orbit span {
+  position: absolute;
+  inset: calc(var(--ring, 0) * 22px);
+  border: 1px solid rgba(114, 199, 255, 0.2);
+  border-radius: 50%;
+}
+
+.intro-orbit span:nth-child(1) {
+  --ring: 0;
+  border-top-color: rgba(86, 242, 151, 0.74);
+}
+
+.intro-orbit span:nth-child(2) {
+  --ring: 1;
+  border-right-color: rgba(255, 196, 119, 0.62);
+  transform: rotate(28deg);
+}
+
+.intro-orbit span:nth-child(3) {
+  --ring: 2;
+  border-bottom-color: rgba(86, 242, 151, 0.48);
+  transform: rotate(-34deg);
+}
+
+.intro-biometric {
+  position: absolute;
+  left: 9%;
+  top: 18%;
+  width: 120px;
+  display: grid;
+  gap: 7px;
+}
+
+.intro-biometric span {
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--green), rgba(114,199,255,0.32), transparent);
+  transform-origin: left center;
+}
+
+.intro-biometric span:nth-child(3n) {
+  width: 76%;
+}
+
+.intro-biometric span:nth-child(4n) {
+  width: 58%;
+  background: linear-gradient(90deg, var(--amber), rgba(255,196,119,0.12), transparent);
+}
+
+.intro-geo-trace {
+  position: absolute;
+  right: 9%;
+  bottom: 18%;
+  width: 170px;
+  height: 112px;
+  border: 1px solid rgba(210, 235, 218, 0.1);
+  background:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.trace-node {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 16px rgba(86,242,151,0.75);
+}
+
+.trace-node.a { left: 24px; top: 34px; }
+.trace-node.b { left: 86px; top: 58px; background: var(--cyan); }
+.trace-node.c { right: 28px; top: 28px; background: var(--amber); }
+
+.trace-path {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(86,242,151,0.16), rgba(86,242,151,0.72), rgba(114,199,255,0.28));
+  transform-origin: left center;
+}
+
+.trace-path.p1 { left: 31px; top: 41px; width: 72px; transform: rotate(21deg); }
+.trace-path.p2 { left: 92px; top: 61px; width: 72px; transform: rotate(-25deg); }
+
+.intro-readout {
+  position: absolute;
+  left: clamp(18px, 6vw, 86px);
+  bottom: clamp(92px, 13vh, 150px);
+  z-index: 3;
+  display: grid;
+  gap: 8px;
+  width: min(320px, calc(100vw - 36px));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+
+.intro-readout li {
+  display: grid;
+  grid-template-columns: 82px 1fr;
+  gap: 14px;
+  align-items: center;
+  min-height: 32px;
+  padding: 8px 10px;
+  border: 1px solid rgba(210, 235, 218, 0.12);
+  border-radius: 6px;
+  background: rgba(8, 13, 11, 0.58);
+  backdrop-filter: blur(10px);
+}
+
+.intro-readout span,
+.intro-readout strong,
+.intro-number-cloud span {
+  font-family: var(--font-mono);
+}
+
+.intro-readout span {
+  color: var(--quiet);
+  font-size: 0.68rem;
+}
+
+.intro-readout strong {
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 500;
+}
+
+.intro-number-cloud {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.intro-number-cloud span {
+  position: absolute;
+  color: rgba(238, 244, 239, 0.28);
+  font-size: 0.78rem;
+  letter-spacing: 0;
+}
+
+.intro-number-cloud span:nth-child(1) { left: 18%; top: 23%; }
+.intro-number-cloud span:nth-child(2) { right: 20%; top: 26%; color: rgba(114,199,255,0.34); }
+.intro-number-cloud span:nth-child(3) { left: 11%; top: 61%; color: rgba(86,242,151,0.35); }
+.intro-number-cloud span:nth-child(4) { right: 13%; top: 58%; }
+.intro-number-cloud span:nth-child(5) { left: 28%; bottom: 15%; color: rgba(255,196,119,0.36); }
+.intro-number-cloud span:nth-child(6) { right: 31%; bottom: 18%; }
+
+.intro-dna {
+  position: absolute;
+  right: clamp(22px, 8vw, 120px);
+  top: clamp(96px, 18vh, 160px);
+  z-index: 2;
+  display: grid;
+  gap: 9px;
+  width: 118px;
+  pointer-events: none;
+}
+
+.intro-dna span {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(90deg, var(--cyan), transparent 46%, var(--green));
+  transform: rotate(calc((var(--i, 0) - 4) * 4deg));
+}
+
+.intro-dna span::before,
+.intro-dna span::after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 12px rgba(86,242,151,0.6);
+}
+
+.intro-dna span::before {
+  left: 0;
+}
+
+.intro-dna span::after {
+  right: 0;
+  background: var(--cyan);
+  box-shadow: 0 0 12px rgba(114,199,255,0.54);
+}
+
+.intro-dna span:nth-child(1) { --i: 1; }
+.intro-dna span:nth-child(2) { --i: 2; }
+.intro-dna span:nth-child(3) { --i: 3; }
+.intro-dna span:nth-child(4) { --i: 4; }
+.intro-dna span:nth-child(5) { --i: 5; }
+.intro-dna span:nth-child(6) { --i: 6; }
+.intro-dna span:nth-child(7) { --i: 7; }
+.intro-dna span:nth-child(8) { --i: 8; }
+
 .intro-constellation {
   position: absolute;
   width: min(560px, 76vw);
@@ -742,6 +1187,9 @@ a {
 .tech-row span,
 .keyword-row span,
 .skill-group span,
+.switch-tab,
+.project-mini,
+.capability-label,
 .timeline-record span,
 .certificate-card span,
 .contact-row span,
@@ -1140,14 +1588,10 @@ a {
   line-height: 1.9;
 }
 
-.project-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 20px;
-}
-
-.project-card,
-.capability-card,
+.project-workbench,
+.capability-console,
+.project-focus,
+.capability-focus,
 .timeline-record,
 .certificate-card {
   border: 1px solid var(--line);
@@ -1157,8 +1601,8 @@ a {
   transition: transform 0.22s ease, border-color 0.22s ease, background 0.22s ease;
 }
 
-.project-card:hover,
-.capability-card:hover,
+.project-focus:hover,
+.capability-focus:hover,
 .timeline-record:hover,
 .certificate-card:hover {
   transform: translateY(-3px);
@@ -1166,15 +1610,122 @@ a {
   background: var(--panel-strong);
 }
 
-.project-card {
-  padding: clamp(24px, 4vw, 36px);
+.project-workbench {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 0.42fr);
+  gap: 18px;
+  padding: 12px;
+  background:
+    linear-gradient(135deg, rgba(86, 242, 151, 0.08), transparent 38%),
+    rgba(255,255,255,0.022);
 }
 
-.project-card.featured {
-  grid-row: span 2;
+.project-tabs,
+.capability-tabs {
+  grid-column: 1 / -1;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid rgba(210, 235, 218, 0.12);
+  border-radius: 8px;
+  background: rgba(7, 12, 10, 0.56);
+}
+
+.switch-tab,
+.project-mini {
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  color: var(--muted);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+}
+
+.switch-tab {
+  min-height: 58px;
+  padding: 12px 14px;
+  overflow: hidden;
+}
+
+.switch-tab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(135deg, rgba(86,242,151,0.18), rgba(114,199,255,0.08)),
+    rgba(255,255,255,0.035);
+  transform: scaleX(0.72);
+  transition: opacity 0.24s ease, transform 0.32s cubic-bezier(.2,.8,.2,1);
+}
+
+.switch-tab span,
+.switch-tab strong,
+.project-mini span,
+.project-mini strong {
+  position: relative;
+  z-index: 1;
+  display: block;
+}
+
+.switch-tab span,
+.project-mini span {
+  color: var(--quiet);
+  font-size: 0.7rem;
+  margin-bottom: 7px;
+}
+
+.switch-tab strong,
+.project-mini strong {
+  font-size: 0.86rem;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+.switch-tab:hover,
+.switch-tab.active,
+.project-mini:hover,
+.project-mini.active {
+  color: var(--text);
+  border-color: rgba(86,242,151,0.26);
+}
+
+.switch-tab.active::before {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.project-focus {
+  min-height: 460px;
+  padding: clamp(24px, 4vw, 40px);
   background:
     linear-gradient(135deg, var(--green-soft), transparent 42%),
     var(--panel);
+}
+
+.project-side {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.project-mini {
+  width: 100%;
+  min-height: 112px;
+  padding: 16px;
+  background: rgba(255,255,255,0.024);
+}
+
+.project-mini.active {
+  background:
+    linear-gradient(90deg, rgba(86,242,151,0.12), rgba(114,199,255,0.045)),
+    rgba(255,255,255,0.035);
+  box-shadow: inset 2px 0 0 var(--green);
 }
 
 .record-head {
@@ -1192,8 +1743,8 @@ a {
   font-weight: 500;
 }
 
-.project-card h3,
-.capability-card h3,
+.project-focus h3,
+.capability-focus h3,
 .timeline-record h3,
 .certificate-card h3 {
   margin: 0;
@@ -1273,19 +1824,45 @@ a {
   font-size: 0.74rem;
 }
 
-.pillar-grid,
 .certificate-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
 
-.capability-card,
 .certificate-card {
   padding: 28px;
 }
 
-.capability-card p,
+.capability-console {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1fr);
+  gap: 18px;
+  padding: 12px;
+  background:
+    linear-gradient(120deg, rgba(114, 199, 255, 0.07), transparent 46%),
+    rgba(255,255,255,0.022);
+}
+
+.capability-tabs {
+  grid-column: 1 / -1;
+}
+
+.capability-focus {
+  padding: clamp(24px, 4vw, 34px);
+  background:
+    linear-gradient(135deg, rgba(114,199,255,0.11), transparent 44%),
+    var(--panel);
+}
+
+.capability-label {
+  display: block;
+  margin-bottom: 14px;
+  color: var(--cyan);
+  font-size: 0.72rem;
+}
+
+.capability-focus p,
 .certificate-card p,
 .timeline-record p {
   margin: 14px 0 0;
@@ -1294,7 +1871,6 @@ a {
 }
 
 .skill-matrix {
-  margin-top: 24px;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   border: 1px solid var(--line);
@@ -1412,8 +1988,8 @@ a {
   }
 
   .hero-grid,
-  .project-grid,
-  .pillar-grid,
+  .project-workbench,
+  .capability-console,
   .certificate-grid,
   .profile-section {
     grid-template-columns: 1fr;
@@ -1423,8 +1999,8 @@ a {
     justify-content: flex-start;
   }
 
-  .project-card.featured {
-    grid-row: auto;
+  .project-side {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .network-visual {
@@ -1441,39 +2017,187 @@ a {
   .content-section,
   .contact-section,
   .profile-section {
-    width: min(100% - 28px, 1180px);
+    width: min(100% - 24px, 1180px);
   }
 
   .site-nav {
-    padding: 18px 16px;
+    padding: 14px 12px;
   }
 
   .hero-section {
-    padding-top: 104px;
+    min-height: auto;
+    padding: 90px 0 34px;
+  }
+
+  .hero-grid {
+    gap: 26px;
+  }
+
+  .hero-kicker {
+    margin-bottom: 12px;
+    font-size: 0.72rem;
   }
 
   .hero-title {
-    font-size: clamp(2.4rem, 13vw, 4rem);
+    font-size: clamp(2.25rem, 11.8vw, 3.35rem);
+    line-height: 1.08;
+  }
+
+  .hero-copy,
+  .section-heading p:last-child,
+  .profile-card p:last-child {
+    font-size: 0.95rem;
+    line-height: 1.78;
+  }
+
+  .hero-copy {
+    margin-top: 20px;
+  }
+
+  .hero-actions {
+    display: grid;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .primary-action,
+  .secondary-action {
+    width: 100%;
+    min-height: 42px;
+    padding: 0 14px;
+  }
+
+  .content-section,
+  .contact-section {
+    padding: 72px 0;
+  }
+
+  .profile-section {
+    padding: 42px 0 12px;
+  }
+
+  .section-heading {
+    margin-bottom: 28px;
+  }
+
+  .section-heading h2 {
+    font-size: clamp(1.9rem, 9vw, 2.8rem);
+  }
+
+  .profile-card h2 {
+    font-size: clamp(2rem, 10vw, 3rem);
   }
 
   .intro-status {
+    max-width: min(320px, 84vw);
+    margin-bottom: 14px;
     text-align: center;
-    line-height: 1.6;
+    font-size: 0.66rem;
+    line-height: 1.55;
   }
 
   .intro-title {
-    font-size: clamp(3.2rem, 18vw, 5.4rem);
+    font-size: clamp(2.8rem, 16vw, 4.5rem);
+  }
+
+  .intro-copy {
+    max-width: 270px;
+    margin-top: 16px;
+    text-align: center;
+    font-size: 0.78rem;
+  }
+
+  .intro-access-frame {
+    top: 50%;
+    width: min(430px, 86vw);
+    aspect-ratio: 0.82;
+    transform: translateY(-50%);
+  }
+
+  .intro-orbit {
+    width: min(230px, 58vw);
+  }
+
+  .intro-constellation {
+    width: min(390px, 86vw);
+    opacity: 0.5;
+  }
+
+  .intro-pulse {
+    width: 132px;
+    height: 132px;
+    margin: -66px 0 0 -66px;
+  }
+
+  .intro-readout {
+    left: 14px;
+    right: 14px;
+    bottom: 68px;
+    gap: 6px;
+    width: auto;
+  }
+
+  .intro-readout li {
+    grid-template-columns: 58px 1fr;
+    min-height: 28px;
+    padding: 6px 8px;
+  }
+
+  .intro-readout span {
+    font-size: 0.62rem;
+  }
+
+  .intro-readout strong {
+    font-size: 0.66rem;
+  }
+
+  .intro-skip {
+    right: 14px;
+    bottom: 14px;
+    min-height: 34px;
+    padding: 0 12px;
+    font-size: 0.78rem;
+  }
+
+  .intro-number-cloud span {
+    font-size: 0.64rem;
+  }
+
+  .intro-biometric,
+  .intro-geo-trace,
+  .intro-dna {
+    display: none;
   }
 
   .network-visual {
-    min-height: 400px;
+    min-height: 340px;
   }
 
   .chain-stack {
     max-width: none;
+    gap: 10px;
+  }
+
+  .chain-card {
+    padding: 12px 14px;
+  }
+
+  .chain-card p {
+    font-size: 0.86rem;
+  }
+
+  .tx-stream {
+    height: 92px;
+  }
+
+  .network-console {
+    width: 100%;
+    padding: 12px;
   }
 
   .hero-stats,
+  .project-tabs,
+  .capability-tabs,
   .skill-matrix {
     grid-template-columns: 1fr;
   }
@@ -1484,12 +2208,141 @@ a {
     gap: 8px;
   }
 
+  .stat-card {
+    min-height: 72px;
+    padding: 14px;
+  }
+
+  .profile-tags {
+    gap: 7px;
+  }
+
+  .profile-tags span,
+  .tech-row span,
+  .keyword-row span {
+    padding: 6px 8px;
+    font-size: 0.68rem;
+  }
+
   .skill-group {
     border-right: 0;
+    padding: 16px;
   }
 
   .skill-group:nth-last-child(2) {
     border-bottom: 1px solid var(--line);
+  }
+
+  .project-workbench,
+  .capability-console {
+    padding: 10px;
+    gap: 12px;
+  }
+
+  .project-focus,
+  .capability-focus,
+  .timeline-record,
+  .certificate-card {
+    min-height: auto;
+    padding: 20px;
+  }
+
+  .project-focus h3,
+  .capability-focus h3,
+  .timeline-record h3,
+  .certificate-card h3 {
+    font-size: 1.12rem;
+  }
+
+  .project-side {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .switch-tab,
+  .project-mini {
+    min-height: 58px;
+    padding: 10px 12px;
+  }
+
+  .project-mini {
+    min-height: 74px;
+  }
+
+  .project-summary,
+  .role-row p,
+  .evidence-list li,
+  .capability-focus p,
+  .certificate-card p,
+  .timeline-record p,
+  .skill-group p {
+    font-size: 0.92rem;
+    line-height: 1.72;
+  }
+
+  .timeline-list {
+    gap: 14px;
+  }
+
+  .timeline-record {
+    margin-left: 24px;
+  }
+
+  .timeline-list::before {
+    left: 7px;
+  }
+
+  .timeline-record::before {
+    left: -30px;
+    top: 26px;
+    width: 11px;
+    height: 11px;
+  }
+
+  .contact-row {
+    padding: 18px;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-mark {
+    font-size: 0.7rem;
+  }
+
+  .hero-title {
+    font-size: clamp(2rem, 11vw, 2.7rem);
+  }
+
+  .intro-title {
+    font-size: clamp(2.45rem, 15vw, 3.5rem);
+  }
+
+  .intro-access-frame {
+    width: 82vw;
+  }
+
+  .intro-readout {
+    bottom: 58px;
+  }
+
+  .intro-readout li {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .network-visual {
+    min-height: 300px;
+  }
+
+  .project-focus,
+  .capability-focus,
+  .timeline-record,
+  .certificate-card {
+    padding: 16px;
   }
 }
 </style>
