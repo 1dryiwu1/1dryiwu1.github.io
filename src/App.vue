@@ -139,6 +139,8 @@ const contacts = [
 
 const activeProject = computed(() => projects[activeProjectIndex.value]);
 const activeCapability = computed(() => capabilityPillars[activeCapabilityIndex.value]);
+const projectTabStyle = computed(() => ({ '--active-tab-index': activeProjectIndex.value }));
+const capabilityTabStyle = computed(() => ({ '--active-tab-index': activeCapabilityIndex.value }));
 
 function closeIntro() {
   introTimeline?.progress(1);
@@ -149,11 +151,23 @@ function animatePanel(selector) {
   nextTick(() => {
     const target = root.value?.querySelector(selector);
     if (!target) return;
-    gsap.fromTo(
+    const children = target.querySelectorAll('.record-head, h3, .project-summary, .role-row, .evidence-list li, .tech-row span, .capability-label, p, .keyword-row span, .signal-meter span');
+    const timeline = gsap.timeline();
+
+    timeline.fromTo(
       target,
       { autoAlpha: 0, y: 14, filter: 'blur(6px)' },
-      { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.42, ease: 'power3.out' },
+      { autoAlpha: 1, y: 0, filter: 'blur(0px)', duration: 0.34, ease: 'power3.out' },
     );
+
+    if (children.length) {
+      timeline.fromTo(
+        children,
+        { autoAlpha: 0, y: 10 },
+        { autoAlpha: 1, y: 0, duration: 0.34, ease: 'power3.out', stagger: 0.035 },
+        '-=0.18',
+      );
+    }
   });
 }
 
@@ -384,6 +398,29 @@ onMounted(() => {
         ease: 'sine.inOut',
         stagger: 0.12,
       });
+
+      gsap.fromTo('.stat-card strong', {
+        y: 8,
+        autoAlpha: 0.45,
+      }, {
+        y: 0,
+        autoAlpha: 1,
+        duration: 0.64,
+        repeat: -1,
+        repeatDelay: 4.2,
+        yoyo: true,
+        ease: 'sine.inOut',
+        stagger: { each: 0.08, from: 'center' },
+      });
+
+      gsap.to('.signal-meter span', {
+        scaleY: () => gsap.utils.random(0.35, 1),
+        duration: 0.74,
+        repeat: -1,
+        yoyo: true,
+        ease: 'sine.inOut',
+        stagger: 0.06,
+      });
     }
 
     setupRevealAnimations();
@@ -496,6 +533,11 @@ onUnmounted(() => {
 
         <div class="network-visual" aria-label="区块链网络动态视觉">
           <canvas ref="networkCanvas" class="network-canvas"></canvas>
+          <svg class="network-routes" viewBox="0 0 640 520" aria-hidden="true">
+            <path class="route-path main" d="M72 402 C164 318 210 164 332 208 S462 328 568 118" />
+            <path class="route-path secondary" d="M86 122 C178 184 246 92 330 156 S474 206 548 382" />
+            <path class="route-path accent" d="M124 462 C238 376 294 414 388 318 S500 238 584 268" />
+          </svg>
           <div class="network-overlay">
             <div class="chain-stack">
               <article v-for="block in chainBlocks" :key="block.title" class="chain-card">
@@ -546,7 +588,8 @@ onUnmounted(() => {
       </div>
 
       <div class="project-workbench reveal">
-        <div class="project-tabs" role="tablist" aria-label="项目切换">
+        <div class="project-tabs" role="tablist" aria-label="项目切换" :style="projectTabStyle">
+          <span class="tab-indicator" aria-hidden="true"></span>
           <button
             v-for="(project, index) in projects"
             :id="`project-tab-${project.code}`"
@@ -573,6 +616,9 @@ onUnmounted(() => {
           <div class="record-head">
             <span>{{ activeProject.label }}</span>
             <strong>{{ activeProject.code }}</strong>
+          </div>
+          <div class="signal-meter" aria-hidden="true">
+            <span v-for="index in 7" :key="index"></span>
           </div>
           <h3>{{ activeProject.title }}</h3>
           <p class="project-summary">{{ activeProject.summary }}</p>
@@ -612,7 +658,8 @@ onUnmounted(() => {
       </div>
 
       <div class="capability-console reveal">
-        <div class="capability-tabs" role="tablist" aria-label="能力方向切换">
+        <div class="capability-tabs" role="tablist" aria-label="能力方向切换" :style="capabilityTabStyle">
+          <span class="tab-indicator" aria-hidden="true"></span>
           <button
             v-for="(pillar, index) in capabilityPillars"
             :id="`capability-tab-${index}`"
@@ -1402,6 +1449,42 @@ a {
   height: 100%;
 }
 
+.network-routes {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.78;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+.route-path {
+  fill: none;
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-dasharray: 10 18;
+  animation: route-flow 6.4s linear infinite;
+  filter: drop-shadow(0 0 10px rgba(86, 242, 151, 0.28));
+}
+
+.route-path.main {
+  stroke: rgba(86, 242, 151, 0.62);
+}
+
+.route-path.secondary {
+  stroke: rgba(114, 199, 255, 0.48);
+  stroke-dasharray: 6 20;
+  animation-duration: 7.8s;
+  animation-direction: reverse;
+}
+
+.route-path.accent {
+  stroke: rgba(255, 196, 119, 0.38);
+  stroke-dasharray: 2 16;
+  animation-duration: 5.8s;
+}
+
 .network-overlay {
   position: absolute;
   inset: 0;
@@ -1512,11 +1595,28 @@ a {
 }
 
 .stat-card {
+  position: relative;
+  overflow: hidden;
   min-height: 84px;
   padding: 18px 20px;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: rgba(255,255,255,0.025);
+}
+
+.stat-card::after {
+  content: '';
+  position: absolute;
+  inset: auto 14px 12px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(86,242,151,0.1), rgba(86,242,151,0.55), rgba(114,199,255,0.12));
+  transform: scaleX(0.24);
+  transform-origin: left center;
+  transition: transform 0.32s ease;
+}
+
+.stat-card:hover::after {
+  transform: scaleX(1);
 }
 
 .stat-card span {
@@ -1645,9 +1745,28 @@ a {
   background: rgba(7, 12, 10, 0.56);
 }
 
+.tab-indicator {
+  position: absolute;
+  z-index: 0;
+  left: 8px;
+  top: 8px;
+  bottom: 8px;
+  width: calc((100% - 32px) / 3);
+  border: 1px solid rgba(86,242,151,0.28);
+  border-radius: 6px;
+  background:
+    linear-gradient(135deg, rgba(86,242,151,0.16), rgba(114,199,255,0.07)),
+    rgba(255,255,255,0.032);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.025), 0 12px 30px rgba(0,0,0,0.16);
+  transform: translateX(calc(var(--active-tab-index, 0) * (100% + 8px)));
+  transition: transform 0.38s cubic-bezier(.2,.8,.2,1), border-color 0.2s ease;
+  pointer-events: none;
+}
+
 .switch-tab,
 .project-mini {
   position: relative;
+  z-index: 1;
   border: 1px solid transparent;
   border-radius: 6px;
   color: var(--muted);
@@ -1669,9 +1788,7 @@ a {
   inset: 0;
   opacity: 0;
   border-radius: inherit;
-  background:
-    linear-gradient(135deg, rgba(86,242,151,0.18), rgba(114,199,255,0.08)),
-    rgba(255,255,255,0.035);
+  background: linear-gradient(90deg, rgba(86,242,151,0.12), transparent 62%);
   transform: scaleX(0.72);
   transition: opacity 0.24s ease, transform 0.32s cubic-bezier(.2,.8,.2,1);
 }
@@ -1708,7 +1825,7 @@ a {
 }
 
 .switch-tab.active::before {
-  opacity: 1;
+  opacity: 0.7;
   transform: scaleX(1);
 }
 
@@ -1753,6 +1870,30 @@ a {
   color: var(--green);
   font-size: 1.08rem;
   font-weight: 500;
+}
+
+.signal-meter {
+  display: flex;
+  align-items: end;
+  gap: 5px;
+  width: 92px;
+  height: 28px;
+  margin: -8px 0 18px;
+}
+
+.signal-meter span {
+  display: block;
+  width: 7px;
+  height: 100%;
+  min-height: 7px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(86,242,151,0.92), rgba(114,199,255,0.22));
+  box-shadow: 0 0 14px rgba(86,242,151,0.22);
+  transform-origin: bottom center;
+}
+
+.signal-meter span:nth-child(2n) {
+  background: linear-gradient(180deg, rgba(114,199,255,0.78), rgba(86,242,151,0.16));
 }
 
 .project-focus h3,
@@ -1994,6 +2135,16 @@ a {
   background: rgba(86,242,151,0.06);
 }
 
+@keyframes route-flow {
+  from {
+    stroke-dashoffset: 0;
+  }
+
+  to {
+    stroke-dashoffset: -112;
+  }
+}
+
 @media (max-width: 980px) {
   .nav-links {
     display: none;
@@ -2214,6 +2365,14 @@ a {
     grid-template-columns: 1fr;
   }
 
+  .tab-indicator {
+    right: 8px;
+    bottom: auto;
+    width: auto;
+    height: 58px;
+    transform: translateY(calc(var(--active-tab-index, 0) * (100% + 8px)));
+  }
+
   .role-row,
   .contact-row {
     grid-template-columns: 1fr;
@@ -2350,11 +2509,26 @@ a {
     min-height: 300px;
   }
 
+  .route-path {
+    opacity: 0.62;
+  }
+
   .project-focus,
   .capability-focus,
   .timeline-record,
   .certificate-card {
     padding: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .route-path {
+    animation: none;
+  }
+
+  .tab-indicator,
+  .stat-card::after {
+    transition: none;
   }
 }
 </style>
