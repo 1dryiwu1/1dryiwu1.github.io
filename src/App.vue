@@ -481,9 +481,12 @@ onUnmounted(() => {
       <div class="hero-grid">
         <div class="hero-content">
           <p class="hero-kicker">BLOCKCHAIN ENGINEERING / TRUSTED SYSTEMS</p>
-          <h1 class="hero-title">把链上逻辑、共识机制与工程交付连接起来</h1>
+          <h1 class="hero-title">
+            <span>链上可信系统</span>
+            <span>工程记录</span>
+          </h1>
           <p class="hero-copy">
-            以项目、技术能力与竞赛荣誉为核心，集中呈现区块链工程方向的学习成果、实践经历和可验证交付。
+            以 Raft 共识、智能合约与工程交付为主线，整理我的区块链项目实践、能力结构与成长路径。
           </p>
           <div class="hero-actions">
             <a href="#projects" class="primary-action">进入项目记录</a>
@@ -1321,9 +1324,18 @@ a {
 .hero-title {
   max-width: 760px;
   margin: 0;
-  font-size: clamp(2.7rem, 7.5vw, 6.5rem);
-  line-height: 1.02;
+  font-size: clamp(3.2rem, 7vw, 6.1rem);
+  line-height: 0.98;
   font-weight: 700;
+}
+
+.hero-title span {
+  display: block;
+}
+
+.hero-title span:last-child {
+  color: var(--green);
+  text-shadow: 0 0 34px rgba(86, 242, 151, 0.16);
 }
 
 .hero-copy {
@@ -2039,8 +2051,8 @@ a {
   }
 
   .hero-title {
-    font-size: clamp(2.25rem, 11.8vw, 3.35rem);
-    line-height: 1.08;
+    font-size: clamp(2.45rem, 12vw, 3.6rem);
+    line-height: 1.02;
   }
 
   .hero-copy,
@@ -2310,7 +2322,7 @@ a {
   }
 
   .hero-title {
-    font-size: clamp(2rem, 11vw, 2.7rem);
+    font-size: clamp(2.05rem, 11.5vw, 2.8rem);
   }
 
   .intro-title {
